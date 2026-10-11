@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>海峡市场核查 · 全国海鲜水产批发市场供应能力全景</title>
+<meta name="description" content="全国 30 座海鲜水产批发市场核查：供应品类、规模能力与市场级别全景可视化。">
+<meta name="theme-color" content="#030712">
+<meta property="og:title" content="海峡市场核查 · 全国海鲜水产批发市场供应能力全景">
+<meta property="og:description" content="30 座批发市场 · 供应品类 / 规模能力 / 市场级别全景可视化核查。">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050d1c'/%3E%3Cpath d='M12 34c6-8 12-10 18-6s12 2 20-8' stroke='%2367e8f9' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M12 42c6-8 12-10 18-6s12 2 20-8' stroke='%232dd4bf' stroke-width='4' fill='none' stroke-linecap='round' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="is-loading">
+<noscript><style>.reveal,.reveal-hero,.hero-title .ch{opacity:1!important;transform:none!important;filter:none!important}#preloader{display:none!important}</style></noscript>
+<div id="grain" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"><i></i></div>
+
+<!-- ══════════ 预加载 ══════════ -->
+<div id="preloader" aria-hidden="true">
+  <div class="pre-mark">
+    <svg viewBox="0 0 64 64"><path d="M8 30c7-9 14-11 21-6.5S43 27 56 16" /><path d="M8 40c7-9 14-11 21-6.5S43 37 56 26" /></svg>
+  </div>
+  <div class="pre-num"><span id="pre-count">0</span><em>%</em></div>
+  <div class="pre-line"><i></i></div>
+  <p class="pre-label">正在校准潮汐数据…</p>
+</div>
+
+<!-- ══════════ 导航 ══════════ -->
+<header id="nav">
+  <a class="brand" href="#hero" data-hover>
+    <svg viewBox="0 0 64 64"><path d="M8 30c7-9 14-11 21-6.5S43 27 56 16" /><path d="M8 40c7-9 14-11 21-6.5S43 37 56 26" /></svg>
+    <span class="brand-cn">海峡市场核查</span>
+    <span class="brand-en">COASTAL&nbsp;AUDIT</span>
+  </a>
+  <nav class="nav-links" aria-label="主导航">
+    <a href="#overview" data-hover>全局总览</a>
+    <a href="#tiers" data-hover>分级体系</a>
+    <a href="#map" data-hover>全国分布</a>
+    <a href="#directory" data-hover>市场名录</a>
+    <a href="#method" data-hover>核查方法</a>
+  </nav>
+  <div class="nav-right">
+    <span class="nav-badge"><i></i>台账 943 店</span>
+    <button class="nav-ver" data-hover>v2026.10</button>
+  </div>
+</header>
+
+<main>
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <canvas id="ocean" aria-hidden="true"></canvas>
+  <div class="hero-veil"></div>
+  <div class="aurora a1" aria-hidden="true"></div>
+  <div class="aurora a2" aria-hidden="true"></div>
+  <div class="shaft" aria-hidden="true"></div>
+
+  <div class="hero-hud hud-tl" aria-hidden="true">
+    <span>SUPPLY CHAIN INTELLIGENCE</span><b>N 22.5° · E 114.1°</b>
+  </div>
+  <div class="hero-hud hud-tr" aria-hidden="true">
+    <span>数据核查版本</span><b>2026.10 · OFFLINE LEDGER</b>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal-hero" style="--d:.05s"><i></i>全国海鲜水产批发市场 · 供应能力全景核查<i></i></p>
+    <h1 class="hero-title" id="hero-title" aria-label="海峡市场核查">海峡市场核查</h1>
+    <p class="hero-sub reveal-hero" style="--d:.25s">三十座批发市场的<b>供应品类</b>、<b>规模能力</b>与<b>市场级别</b>，<br class="br-d">一次看尽中国海鲜流通的潮汐版图</p>
+    <div class="hero-cta reveal-hero" style="--d:.4s">
+      <a class="btn btn-primary magnetic" href="#overview" data-hover><span>开始核查</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost magnetic" href="#map" data-hover><span>查看全国分布</span></a>
+    </div>
+    <div class="hero-stats reveal-hero" style="--d:.55s">
+      <div class="hs"><b data-count="30">0</b><span>核查市场</span></div>
+      <div class="hs"><b data-count="26">0</b><span>市场城市</span></div>
+      <div class="hs"><b data-count="197">0</b><span>辐射城市</span></div>
+      <div class="hs"><b data-count="943">0</b><span>规划门店</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><span></span><em>SCROLL</em></div>
+</section>
+
+<!-- ══════════ 滚动横幅 ══════════ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="marquee-track"></div>
+</div>
+
+<!-- ══════════ 全局总览 ══════════ -->
+<section id="overview" class="section">
+  <header class="sec-head reveal">
+    <p class="sec-kicker"><i></i>01 · GLOBAL OVERVIEW<i></i></p>
+    <h2 class="sec-title">一潮之下，<em>三十港</em></h2>
+    <p class="sec-sub">从华南黄沙到东北之滨，核查覆盖 26 城 30 座批发市场，串联 197 个辐射城市的鲜活供应链。</p>
+  </header>
+
+  <div class="kpi-grid">
+    <article class="kpi kpi-big reveal" style="--d:0s">
+      <span class="kpi-label">市场总数</span>
+      <div class="kpi-num"><b data-count="30">0</b><i>座</i></div>
+      <p>覆盖 26 个城市的一级至三级批发市场</p>
+      <svg class="kpi-wave" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 20 Q 25 8 50 20 T 100 20 T 150 20 T 200 20" /></svg>
+    </article>
+    <article class="kpi reveal" style="--d:.08s">
+      <span class="kpi-label">一级批发市场</span>
+      <div class="kpi-num sm"><b data-count="25">0</b><i>座</i></div>
+      <p>承担区域集散的源头市场</p>
+    </article>
+    <article class="kpi reveal" style="--d:.16s">
+      <span class="kpi-label">规划开店容量</span>
+      <div class="kpi-num sm"><b data-count="943">0</b><i>家</i></div>
+      <p>台账口径 · 与汇总表核对一致</p>
+    </article>
+    <article class="kpi reveal" style="--d:.24s">
+      <span class="kpi-label">辐射城市总量</span>
+      <div class="kpi-num sm"><b data-count="197">0</b><i>城</i></div>
+      <p>去重后市场覆盖城市数</p>
+    </article>
+  </div>
+
+  <div class="ov-row">
+    <article class="panel chart-panel reveal">
+      <header class="panel-head"><h3>市场级别构成</h3><span class="panel-tag">TIER MIX</span></header>
+      <div class="donut-wrap">
+        <svg class="donut" viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="donut-bg" cx="100" cy="100" r="82"/>
+          <circle class="donut-seg seg1" cx="100" cy="100" r="82"/>
+          <circle class="donut-seg seg2" cx="100" cy="100" r="82"/>
+          <circle class="donut-seg seg3" cx="100" cy="100" r="82"/>
+        </svg>
+        <div class="donut-center"><b data-count="30">0</b><span>市场</span></div>
+      </div>
+      <ul class="legend" id="tier-legend"></ul>
+    </article>
+
+    <article class="panel chart-panel reveal">
+      <header class="panel-head"><h3>覆盖能力等级</h3><span class="panel-tag">CAPACITY GRADE</span></header>
+      <div class="bars" id="grade-bars"></div>
+      <p class="chart-note">按台账「规划开店容量」推算 · S≥60 · A≥40 · B≥20 · C&lt;20</p>
+    </article>
+
+    <article class="panel chart-panel reveal">
+      <header class="panel-head"><h3>供应品类覆盖</h3><span class="panel-tag">CATEGORIES</span></header>
+      <div class="bars thin" id="cat-bars"></div>
+      <p class="chart-note">市场具备该品类供应能力的数量</p>
+    </article>
+  </div>
+</section>
+
+<!-- ══════════ 分级体系 ══════════ -->
+<section id="tiers" class="section">
+  <header class="sec-head reveal">
+    <p class="sec-kicker"><i></i>02 · TIER SYSTEM<i></i></p>
+    <h2 class="sec-title">三级<em>潮位</em></h2>
+    <p class="sec-sub">按集散半径与供应链角色，将 30 座市场划分为三个潮位层级。</p>
+  </header>
+  <div class="tier-grid">
+    <article class="tier-card t1 reveal" style="--d:0s">
+      <div class="tc-num">01</div>
+      <div class="tc-glow" aria-hidden="true"></div>
+      <h3>一级批发市场</h3>
+      <p class="tc-en">PRIMARY WHOLESALE</p>
+      <p class="tc-desc">城市或区域的主导集散中心，货源直达产地与港口，辐射多城甚至跨省供应，是供应链的<b>主潮</b>。</p>
+      <div class="tc-stats"><b data-count="25">0</b><span>座 · 占 83%</span></div>
+      <div class="tc-tags"><span>广州黄沙</span><span>福州海峡</span><span>杭州新农都</span><span>郑州万邦</span></div>
+    </article>
+    <article class="tier-card t2 reveal" style="--d:.1s">
+      <div class="tc-num">02</div>
+      <div class="tc-glow" aria-hidden="true"></div>
+      <h3>二级批发市场</h3>
+      <p class="tc-en">SECONDARY / ORIGIN</p>
+      <p class="tc-desc">产地收购码头与城市分销节点，承接一级货源向下分拨，或在一手渔港集货，是供应链的<b>支流</b>。</p>
+      <div class="tc-stats"><b data-count="4">0</b><span>座 · 占 13%</span></div>
+      <div class="tc-tags"><span>江门广海</span><span>汕头和平</span><span>成都青石桥</span></div>
+    </article>
+    <article class="tier-card t3 reveal" style="--d:.2s">
+      <div class="tc-num">03</div>
+      <div class="tc-glow" aria-hidden="true"></div>
+      <h3>三级市场</h3>
+      <p class="tc-en">RETAIL TERMINAL</p>
+      <p class="tc-desc">面向城区终端的零售型市场，直接服务社区居民与餐饮门店，是供应链的<b>细流</b>。</p>
+      <div class="tc-stats"><b data-count="1">0</b><span>座 · 占 3%</span></div>
+      <div class="tc-tags"><span>青岛埠西</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- ══════════ 全国分布 ══════════ -->
+<section id="map" class="section">
+  <header class="sec-head reveal">
+    <p class="sec-kicker"><i></i>03 · NATIONAL GRID<i></i></p>
+    <h2 class="sec-title">潮汐<em>版图</em></h2>
+    <p class="sec-sub">悬停光点查看市场与其辐射省份；点击进入完整核查档案。</p>
+  </header>
+
+  <div class="map-toolbar reveal">
+    <div class="map-filters" id="map-filters" role="tablist" aria-label="按级别筛选">
+      <button class="mf active" data-tier="0">全部 <em>30</em></button>
+      <button class="mf" data-tier="1"><i class="dot d1"></i>一级 <em>25</em></button>
+      <button class="mf" data-tier="2"><i class="dot d2"></i>二级 <em>4</em></button>
+      <button class="mf" data-tier="3"><i class="dot d3"></i>三级 <em>1</em></button>
+    </div>
+    <div class="map-legend">
+      <span><i class="pulse p1"></i>一级 · 主潮</span>
+      <span><i class="pulse p2"></i>二级 · 支流</span>
+      <span><i class="pulse p3"></i>三级 · 细流</span>
+    </div>
+  </div>
+
+  <div class="map-stage reveal">
+    <svg id="map-svg" viewBox="0 0 1000 760" preserveAspectRatio="xMidYMid meet" role="img" aria-label="中国海鲜水产批发市场分布图"></svg>
+    <div class="map-tooltip" id="map-tooltip" role="tooltip"></div>
+    <div class="map-coverage-note" id="map-cover-note"><i></i>当前显示：<b id="map-cover-name">—</b> 的辐射省份</div>
+  </div>
+  <p class="map-hint reveal">* 省份高亮依据台账「覆盖城市列表」映射生成 · 南海诸岛示意略</p>
+</section>
+
+<!-- ══════════ 市场名录 ══════════ -->
+<section id="directory" class="section">
+  <header class="sec-head reveal">
+    <p class="sec-kicker"><i></i>04 · MARKET DIRECTORY<i></i></p>
+    <h2 class="sec-title">三十港<em>名录</em></h2>
+    <p class="sec-sub">搜索、按城市 / 级别 / 品类筛选，点击任一市场展开完整核查档案。</p>
+  </header>
+
+  <div class="dir-controls reveal">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="dir-search" type="search" placeholder="搜索市场 / 城市 / 地址…" autocomplete="off">
+    </div>
+    <div class="select-box">
+      <select id="dir-city" aria-label="按城市筛选">
+        <option value="">全部城市</option>
+      </select>
+      <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <button class="dir-sort" id="dir-sort" data-hover aria-label="切换排序">
+      <svg viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/></svg><span>按门店容量</span>
+    </button>
+  </div>
+  <div class="dir-tiers reveal" id="dir-tier-filters">
+    <button class="active" data-tier="0">全部级别</button>
+    <button data-tier="1">一级 <em>25</em></button>
+    <button data-tier="2">二级 <em>4</em></button>
+    <button data-tier="3">三级 <em>1</em></button>
+  </div>
+  <div class="dir-cats reveal" id="dir-cat-filters" aria-label="按品类筛选"></div>
+
+  <div class="dir-meta reveal"><span id="dir-count">30 座市场</span><span class="dir-meta-line"></span><span>点击卡片查看核查档案</span></div>
+  <div class="dir-grid" id="dir-grid"></div>
+</section>
+
+<!-- ══════════ 核查方法 ══════════ -->
+<section id="method" class="section">
+  <header class="sec-head reveal">
+    <p class="sec-kicker"><i></i>05 · METHODOLOGY<i></i></p>
+    <h2 class="sec-title">潮声<em>为证</em></h2>
+    <p class="sec-sub">每一条数据都标注来源与置信度，可追溯、可复核。</p>
+  </header>
+  <div class="method-grid">
+    <article class="method-card reveal" style="--d:0s">
+      <span class="m-ico">◈</span>
+      <h3>台账基础层</h3>
+      <p>市场名称、坐标、覆盖城市与规划开店容量取自《水产批发市场明细》台账，并与汇总表交叉核对（合计 943 店一致）。</p>
+      <em>置信度 · 高</em>
+    </article>
+    <article class="method-card reveal" style="--d:.1s">
+      <span class="m-ico">◉</span>
+      <h3>公开资料核查层</h3>
+      <p>市场级别、供应品类与规模数据来自政府公开信息、行业协会与权威媒体报道，逐条标注出处。</p>
+      <em>置信度 · 中—高</em>
+    </article>
+    <article class="method-card reveal" style="--d:.2s">
+      <span class="m-ico">◌</span>
+      <h3>实地复核层</h3>
+      <p>产地型与部分分销市场建议安排实地走访，确认交易时间、商户结构与档口租金后再锁定级别。</p>
+      <em>置信度 · 待核实</em>
+    </article>
+  </div>
+  <div class="sources panel reveal">
+    <header class="panel-head"><h3>参考来源</h3><span class="panel-tag">SOURCES</span></header>
+    <ul class="src-list">
+      <li><a href="https://www.gz.gov.cn/ysgz/xwdt/ysdt/content/mpost_10695079.html" target="_blank" rel="noopener">广州市政府 · 黄沙水产中心日均约600吨供应全国</a></li>
+      <li><a href="http://www.zjscxh.com/site/site04195/upfile/202506/2025061839684905.pdf" target="_blank" rel="noopener">浙江水产流通与加工协会 · 新农都年成交额70余亿元</a></li>
+      <li><a href="https://kunming.cn/news/c/2026-01-31/14015010.shtml" target="_blank" rel="noopener">昆明信息港 · 骏骐市场旺季日交易额超5000万</a></li>
+      <li><a href="https://xmapi.jmtv.cn/web/news/content/286690/1?share=1" target="_blank" rel="noopener">江门广电 · 远恒打造珠江西岸最大水产产业综合体</a></li>
+      <li><a href="http://news.enorth.com.cn/system/2009/08/11/004156299.shtml" target="_blank" rel="noopener">北方网 · 天津王顶堤（新红旗）年交易额百亿级</a></li>
+      <li><a href="https://local.cctv.cn/2025/10/16/ARTI2qile1p2XnLlyhmhyYKW251016.shtml" target="_blank" rel="noopener">央视 · 福州马尾海峡水产品交易中心</a></li>
+      <li><a href="http://www.zgnt.net/content/2025-05/03/content_3260394.htm" target="_blank" rel="noopener">南通日报 · 沪蔬通农批市场</a></li>
+      <li><a href="https://nyncw.sh.gov.cn/mtbd/20180705/0009-23849.html" target="_blank" rel="noopener">上海市农委 · 上海水产市场布局</a></li>
+      <li><a href="https://www.sina.cn/news/article/comos_nisinhk7818754.html" target="_blank" rel="noopener">公开资料 · 石家庄四大海鲜市场对比</a></li>
+      <li><a href="http://static.nfapp.southcn.com/content/201706/11/c475559.html" target="_blank" rel="noopener">南方+ · 广东知名水产批发市场盘点</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer id="footer">
+  <div class="foot-brand">
+    <svg viewBox="0 0 64 64"><path d="M8 30c7-9 14-11 21-6.5S43 27 56 16" /><path d="M8 40c7-9 14-11 21-6.5S43 37 56 26" /></svg>
+    <div><b>海峡市场核查</b><span>COASTAL MARKET AUDIT · 2026</span></div>
+  </div>
+  <p>数据基于台账明细与公开资料整理 · 级别与规模结论供内部选址决策参考，正式决策前建议实地复核。</p>
+  <p class="foot-copy">© 2026 · 潮汐之下，鲜味有源</p>
+</footer>
+
+<!-- ══════════ 市场档案抽屉 ══════════ -->
+<div id="drawer-backdrop" aria-hidden="true"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <button class="drawer-close" id="drawer-close" aria-label="关闭" data-hover>
+    <svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg>
+  </button>
+  <div class="drawer-body" id="drawer-body"></div>
+</aside>
+
+<button id="toTop" aria-label="回到顶部" data-hover><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
+
+<script src="assets/js/china-geo.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ocean.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
