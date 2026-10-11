@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   海峡市场核查 · Coastal Market Audit
+   海鲜市场核查 · Coastal Market Audit
    设计语言：深海夜色 × 生物荧光 × 潮汐光影
    ═══════════════════════════════════════════════════════════════ */
 
@@ -151,8 +151,8 @@ body.cursor-hide #cursor-dot,body.cursor-hide #cursor-ring{opacity:0}
 .hero-eyebrow i:last-child{background:linear-gradient(90deg,var(--cyan),transparent)}
 .hero-title{
   position:relative;font-family:var(--serif);font-weight:900;
-  font-size:clamp(56px,10.5vw,148px);line-height:1.12;letter-spacing:.06em;margin:30px 0 26px;
-  text-shadow:0 0 80px rgba(103,232,249,.28);
+  font-size:clamp(40px,10.2vw,148px);line-height:1.12;letter-spacing:.06em;margin:30px 0 26px;
+  white-space:nowrap;text-shadow:0 0 80px rgba(103,232,249,.28);
 }
 .hero-title::before{
   content:"COASTAL MARKET AUDIT";position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
