@@ -73,15 +73,20 @@ ul,ol{list-style:none}
   75%{transform:translate(14px,-12px)}87.5%{transform:translate(-26px,-8px)}
 }
 
-/* ---------- 自定义光标 ---------- */
-#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;z-index:3000;pointer-events:none;border-radius:50%}
-#cursor-dot{width:7px;height:7px;background:var(--cyan);box-shadow:0 0 12px rgba(103,232,249,.9);transform:translate(-50%,-50%)}
-#cursor-ring{
-  width:38px;height:38px;border:1px solid rgba(103,232,249,.45);
-  transform:translate(-50%,-50%);transition:width .35s var(--ease),height .35s var(--ease),
-  border-color .35s,background .35s;
+/* ---------- 自定义光标（精致版） ----------
+   仅在精确指针设备启用；has-cursor 类由 JS 注入，JS 失效自动回退系统箭头 */
+@media(pointer:fine){
+  html.has-cursor,html.has-cursor body,html.has-cursor a,html.has-cursor button,
+  html.has-cursor .dir-card,html.has-cursor .mk,html.has-cursor select,
+  html.has-cursor [data-hover],html.has-cursor .mf,html.has-cursor .dw-cover-more{cursor:none}
+  html.has-cursor input,html.has-cursor textarea{cursor:text}
 }
-body.cursor-big #cursor-ring{width:74px;height:74px;border-color:rgba(103,232,249,.8);background:rgba(103,232,249,.06)}
+#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;z-index:3000;pointer-events:none;border-radius:50%;
+  will-change:transform;transition:opacity .3s var(--ease),border-color .35s var(--ease),background .35s var(--ease)}
+#cursor-dot{width:6px;height:6px;background:#fff;
+  box-shadow:0 0 0 1px rgba(103,232,249,.45),0 0 12px rgba(103,232,249,.7)}
+#cursor-ring{width:30px;height:30px;border:1px solid rgba(190,225,245,.3)}
+body.cursor-big #cursor-ring{border-color:rgba(103,232,249,.8);background:rgba(103,232,249,.07)}
 body.cursor-hide #cursor-dot,body.cursor-hide #cursor-ring{opacity:0}
 @media(pointer:coarse){#cursor-dot,#cursor-ring{display:none}}
 
@@ -3176,25 +3181,44 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
     });
   })();
 
-  /* ─────────── 自定义光标 ─────────── */
+  /* ─────────── 自定义光标（小实心点 + 缓动光环） ───────────
+     想恢复系统箭头：把 CUSTOM_CURSOR 改成 false 即可 */
+  var CUSTOM_CURSOR = true;
   (function cursor() {
-    if (isTouch) return;
+    if (isTouch || !CUSTOM_CURSOR) return;
     var dot = $("#cursor-dot"), ring = $("#cursor-ring");
+    if (!dot || !ring) return;
+    document.documentElement.classList.add("has-cursor");
     var rx = innerWidth / 2, ry = innerHeight / 2, tx = rx, ty = ry;
+    var rs = 1, rsTarget = 1, ds = 1, dsTarget = 1, down = false;
+    var follow = reduced ? 1 : 0.19, ease = reduced ? 1 : 0.18;
+
     document.addEventListener("pointermove", function (e) {
       tx = e.clientX; ty = e.clientY;
-      dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%)";
     }, { passive: true });
-    (function loop() {
-      rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
-      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
-      requestAnimationFrame(loop);
-    })();
-    document.addEventListener("mouseover", function (e) {
-      document.body.classList.toggle("cursor-big", !!e.target.closest("a,button,.dir-card,.mk,[data-hover],input,select"));
-    });
+    document.addEventListener("pointerdown", function () { down = true; });
+    document.addEventListener("pointerup", function () { down = false; });
+    window.addEventListener("blur", function () { down = false; });
     document.addEventListener("mouseleave", function () { document.body.classList.add("cursor-hide"); });
     document.addEventListener("mouseenter", function () { document.body.classList.remove("cursor-hide"); });
+    document.addEventListener("mouseover", function (e) {
+      var t = e.target;
+      /* 输入框内交还系统 I 形光标，避免打字时找不到落点 */
+      if (t.closest("input,textarea")) { document.body.classList.add("cursor-hide"); return; }
+      document.body.classList.remove("cursor-hide");
+      var big = !!t.closest("a,button,.dir-card,.mk,select,[data-hover],.mf,.dw-cover-more");
+      document.body.classList.toggle("cursor-big", big);
+      rsTarget = big ? 1.72 : 1;
+      dsTarget = big ? 1.28 : 1;
+    });
+    (function loop() {
+      rx += (tx - rx) * follow; ry += (ty - ry) * follow;
+      rs += (rsTarget * (down ? 0.86 : 1) - rs) * ease;
+      ds += (dsTarget * (down ? 0.9 : 1) - ds) * ease;
+      dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%) scale(" + ds.toFixed(3) + ")";
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%) scale(" + rs.toFixed(3) + ")";
+      requestAnimationFrame(loop);
+    })();
   })();
 
   /* ─────────── 滚动：进度 / 导航 / 回顶 / 视差 ─────────── */

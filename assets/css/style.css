@@ -57,15 +57,20 @@ ul,ol{list-style:none}
   75%{transform:translate(14px,-12px)}87.5%{transform:translate(-26px,-8px)}
 }
 
-/* ---------- 自定义光标 ---------- */
-#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;z-index:3000;pointer-events:none;border-radius:50%}
-#cursor-dot{width:7px;height:7px;background:var(--cyan);box-shadow:0 0 12px rgba(103,232,249,.9);transform:translate(-50%,-50%)}
-#cursor-ring{
-  width:38px;height:38px;border:1px solid rgba(103,232,249,.45);
-  transform:translate(-50%,-50%);transition:width .35s var(--ease),height .35s var(--ease),
-  border-color .35s,background .35s;
+/* ---------- 自定义光标（精致版） ----------
+   仅在精确指针设备启用；has-cursor 类由 JS 注入，JS 失效自动回退系统箭头 */
+@media(pointer:fine){
+  html.has-cursor,html.has-cursor body,html.has-cursor a,html.has-cursor button,
+  html.has-cursor .dir-card,html.has-cursor .mk,html.has-cursor select,
+  html.has-cursor [data-hover],html.has-cursor .mf,html.has-cursor .dw-cover-more{cursor:none}
+  html.has-cursor input,html.has-cursor textarea{cursor:text}
 }
-body.cursor-big #cursor-ring{width:74px;height:74px;border-color:rgba(103,232,249,.8);background:rgba(103,232,249,.06)}
+#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;z-index:3000;pointer-events:none;border-radius:50%;
+  will-change:transform;transition:opacity .3s var(--ease),border-color .35s var(--ease),background .35s var(--ease)}
+#cursor-dot{width:6px;height:6px;background:#fff;
+  box-shadow:0 0 0 1px rgba(103,232,249,.45),0 0 12px rgba(103,232,249,.7)}
+#cursor-ring{width:30px;height:30px;border:1px solid rgba(190,225,245,.3)}
+body.cursor-big #cursor-ring{border-color:rgba(103,232,249,.8);background:rgba(103,232,249,.07)}
 body.cursor-hide #cursor-dot,body.cursor-hide #cursor-ring{opacity:0}
 @media(pointer:coarse){#cursor-dot,#cursor-ring{display:none}}
 

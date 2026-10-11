@@ -48,25 +48,44 @@
     });
   })();
 
-  /* ─────────── 自定义光标 ─────────── */
+  /* ─────────── 自定义光标（小实心点 + 缓动光环） ───────────
+     想恢复系统箭头：把 CUSTOM_CURSOR 改成 false 即可 */
+  var CUSTOM_CURSOR = true;
   (function cursor() {
-    if (isTouch) return;
+    if (isTouch || !CUSTOM_CURSOR) return;
     var dot = $("#cursor-dot"), ring = $("#cursor-ring");
+    if (!dot || !ring) return;
+    document.documentElement.classList.add("has-cursor");
     var rx = innerWidth / 2, ry = innerHeight / 2, tx = rx, ty = ry;
+    var rs = 1, rsTarget = 1, ds = 1, dsTarget = 1, down = false;
+    var follow = reduced ? 1 : 0.19, ease = reduced ? 1 : 0.18;
+
     document.addEventListener("pointermove", function (e) {
       tx = e.clientX; ty = e.clientY;
-      dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%)";
     }, { passive: true });
-    (function loop() {
-      rx += (tx - rx) * 0.16; ry += (ty - ry) * 0.16;
-      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%)";
-      requestAnimationFrame(loop);
-    })();
-    document.addEventListener("mouseover", function (e) {
-      document.body.classList.toggle("cursor-big", !!e.target.closest("a,button,.dir-card,.mk,[data-hover],input,select"));
-    });
+    document.addEventListener("pointerdown", function () { down = true; });
+    document.addEventListener("pointerup", function () { down = false; });
+    window.addEventListener("blur", function () { down = false; });
     document.addEventListener("mouseleave", function () { document.body.classList.add("cursor-hide"); });
     document.addEventListener("mouseenter", function () { document.body.classList.remove("cursor-hide"); });
+    document.addEventListener("mouseover", function (e) {
+      var t = e.target;
+      /* 输入框内交还系统 I 形光标，避免打字时找不到落点 */
+      if (t.closest("input,textarea")) { document.body.classList.add("cursor-hide"); return; }
+      document.body.classList.remove("cursor-hide");
+      var big = !!t.closest("a,button,.dir-card,.mk,select,[data-hover],.mf,.dw-cover-more");
+      document.body.classList.toggle("cursor-big", big);
+      rsTarget = big ? 1.72 : 1;
+      dsTarget = big ? 1.28 : 1;
+    });
+    (function loop() {
+      rx += (tx - rx) * follow; ry += (ty - ry) * follow;
+      rs += (rsTarget * (down ? 0.86 : 1) - rs) * ease;
+      ds += (dsTarget * (down ? 0.9 : 1) - ds) * ease;
+      dot.style.transform = "translate(" + tx + "px," + ty + "px) translate(-50%,-50%) scale(" + ds.toFixed(3) + ")";
+      ring.style.transform = "translate(" + rx + "px," + ry + "px) translate(-50%,-50%) scale(" + rs.toFixed(3) + ")";
+      requestAnimationFrame(loop);
+    })();
   })();
 
   /* ─────────── 滚动：进度 / 导航 / 回顶 / 视差 ─────────── */
