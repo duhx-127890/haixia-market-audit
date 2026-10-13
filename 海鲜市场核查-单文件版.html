@@ -240,7 +240,7 @@ body.ready .reveal-hero{opacity:1;transform:none}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- 总览 KPI ---------- */
-.kpi-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:20px;margin-bottom:20px}
+.kpi-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr 1fr;gap:18px;margin-bottom:20px}
 .kpi{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:30px 30px 26px;overflow:hidden;
   background:linear-gradient(160deg,rgba(12,28,50,.6),rgba(7,16,32,.55));transition:border-color .4s,transform .4s var(--ease),box-shadow .4s}
 .kpi:hover{border-color:rgba(103,232,249,.35);transform:translateY(-4px);box-shadow:0 22px 60px -20px rgba(6,30,52,.9)}
@@ -253,6 +253,8 @@ body.ready .reveal-hero{opacity:1;transform:none}
 .kpi-num.sm b{font-size:clamp(36px,3.6vw,52px)}
 .kpi-num i{font-style:normal;font-size:15px;color:var(--muted);letter-spacing:.2em}
 .kpi p{font-size:13px;color:var(--muted);letter-spacing:.04em}
+.kpi p b{color:var(--text);font-weight:500}
+.sec-sub b{color:var(--text);font-weight:600}
 .kpi-wave{position:absolute;left:0;right:0;bottom:0;width:100%;height:34px;opacity:.5}
 .kpi-wave path{fill:none;stroke:var(--teal);stroke-width:1.4;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 2.2s var(--ease)}
 .kpi.in .kpi-wave path{stroke-dashoffset:0}
@@ -316,6 +318,7 @@ body.ready .reveal-hero{opacity:1;transform:none}
 .tc-stats b{font-size:40px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1}
 .t1 .tc-stats b{color:var(--t1)}.t2 .tc-stats b{color:var(--t2)}.t3 .tc-stats b{color:var(--t3)}
 .tc-stats span{font-size:12px;color:var(--dim);letter-spacing:.18em}
+.tc-stats span i{font-style:normal}
 .tc-tags{display:flex;flex-wrap:wrap;gap:8px}
 .tc-tags span{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:5px 12px;border-radius:99px;letter-spacing:.08em;transition:.3s}
 .t1 .tc-tags span:hover{border-color:var(--cyan);color:var(--cyan)}
@@ -407,6 +410,8 @@ body.ready .reveal-hero{opacity:1;transform:none}
 .dir-tiers button:hover{color:var(--text);border-color:var(--line-strong)}
 .dir-tiers button.active{color:#04101d;background:linear-gradient(120deg,var(--cyan),var(--teal));border-color:transparent;font-weight:600}
 .dir-tiers button.active em{color:rgba(4,16,29,.6)}
+.dir-tiers.src button.active{background:linear-gradient(120deg,var(--gold),#dda94e)}
+.dir-tiers.src button:not(.active):hover{border-color:rgba(240,198,116,.5);color:var(--gold)}
 .dir-cats{display:flex;gap:10px;flex-wrap:wrap}
 .dir-cats button{font-size:12.5px;letter-spacing:.1em;color:var(--muted);border:1px solid var(--line);
   padding:8px 16px;border-radius:99px;background:rgba(10,24,44,.35);transition:.35s}
@@ -682,10 +687,10 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <a class="btn btn-ghost magnetic" href="#map" data-hover><span>查看全国分布</span></a>
     </div>
     <div class="hero-stats reveal-hero" style="--d:.55s">
-      <div class="hs"><b data-count="30">0</b><span>核查市场</span></div>
-      <div class="hs"><b data-count="26">0</b><span>市场城市</span></div>
-      <div class="hs"><b data-count="197">0</b><span>辐射城市</span></div>
-      <div class="hs"><b data-count="943">0</b><span>规划门店</span></div>
+      <div class="hs"><b data-count="30" data-metric="markets">0</b><span>核查市场</span></div>
+      <div class="hs"><b data-count="26" data-metric="cities">0</b><span>覆盖城市</span></div>
+      <div class="hs"><b data-count="25" data-metric="provs">0</b><span>覆盖省市</span></div>
+      <div class="hs"><b data-count="943" data-metric="plan">0</b><span>规划门店</span></div>
     </div>
   </div>
 
@@ -702,30 +707,35 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>01 · GLOBAL OVERVIEW<i></i></p>
     <h2 class="sec-title">一潮之下，<em>三十港</em></h2>
-    <p class="sec-sub">从华南黄沙到东北之滨，核查覆盖 26 城 30 座批发市场，串联 197 个辐射城市的鲜活供应链。</p>
+    <p class="sec-sub">覆盖 <b data-metric-text="provs">25</b> 个省市、<b data-metric-text="cities">43</b> 座城市的水产批发市场，串联 <b data-metric-text="coverage">197</b> 个辐射城市的鲜活供应链。</p>
   </header>
 
   <div class="kpi-grid">
     <article class="kpi kpi-big reveal" style="--d:0s">
-      <span class="kpi-label">市场总数</span>
-      <div class="kpi-num"><b data-count="30">0</b><i>座</i></div>
-      <p>覆盖 26 个城市的一级至三级批发市场</p>
+      <span class="kpi-label">核查市场总数</span>
+      <div class="kpi-num"><b data-count="103" data-metric="markets">0</b><i>座</i></div>
+      <p>台账 <b data-metric-text="ledger">30</b> 座 + 公开资料补充 <b data-metric-text="extra">73</b> 座</p>
       <svg class="kpi-wave" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 20 Q 25 8 50 20 T 100 20 T 150 20 T 200 20" /></svg>
     </article>
     <article class="kpi reveal" style="--d:.08s">
       <span class="kpi-label">一级批发市场</span>
-      <div class="kpi-num sm"><b data-count="25">0</b><i>座</i></div>
+      <div class="kpi-num sm"><b data-count="25" data-metric="tier1">0</b><i>座</i></div>
       <p>承担区域集散的源头市场</p>
     </article>
     <article class="kpi reveal" style="--d:.16s">
-      <span class="kpi-label">规划开店容量</span>
-      <div class="kpi-num sm"><b data-count="943">0</b><i>家</i></div>
-      <p>台账口径 · 与汇总表核对一致</p>
+      <span class="kpi-label">待实地复核</span>
+      <div class="kpi-num sm"><b data-count="16" data-metric="pending">0</b><i>座</i></div>
+      <p>产地型与中小市场 · 建议走访确认</p>
     </article>
     <article class="kpi reveal" style="--d:.24s">
-      <span class="kpi-label">辐射城市总量</span>
-      <div class="kpi-num sm"><b data-count="197">0</b><i>城</i></div>
-      <p>去重后市场覆盖城市数</p>
+      <span class="kpi-label">台账规划开店容量</span>
+      <div class="kpi-num sm"><b data-count="943" data-metric="plan">0</b><i>家</i></div>
+      <p>与汇总表核对一致</p>
+    </article>
+    <article class="kpi reveal" style="--d:.32s">
+      <span class="kpi-label">台账辐射城市</span>
+      <div class="kpi-num sm"><b data-count="197" data-metric="coverage">0</b><i>城</i></div>
+      <p>去重后覆盖城市数</p>
     </article>
   </div>
 
@@ -763,7 +773,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>02 · TIER SYSTEM<i></i></p>
     <h2 class="sec-title">三级<em>潮位</em></h2>
-    <p class="sec-sub">按集散半径与供应链角色，将 30 座市场划分为三个潮位层级。</p>
+    <p class="sec-sub">按集散半径与供应链角色，将核查市场划分为三个潮位层级；<b data-metric-text="pending">16</b> 座产地型与中小市场待实地复核。</p>
   </header>
   <div class="tier-grid">
     <article class="tier-card t1 reveal" style="--d:0s">
@@ -772,8 +782,8 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <h3>一级批发市场</h3>
       <p class="tc-en">PRIMARY WHOLESALE</p>
       <p class="tc-desc">城市或区域的主导集散中心，货源直达产地与港口，辐射多城甚至跨省供应，是供应链的<b>主潮</b>。</p>
-      <div class="tc-stats"><b data-count="25">0</b><span>座 · 占 83%</span></div>
-      <div class="tc-tags"><span>广州黄沙</span><span>福州海峡</span><span>杭州新农都</span><span>郑州万邦</span></div>
+      <div class="tc-stats"><b data-count="25" data-metric="tier1">0</b><span>座 · 占 <i data-pct="tier1">83</i>%</span></div>
+      <div class="tc-tags"><span>广州黄沙</span><span>大连辽渔</span><span>常州凌家塘</span><span>湛江霞山</span></div>
     </article>
     <article class="tier-card t2 reveal" style="--d:.1s">
       <div class="tc-num">02</div>
@@ -781,8 +791,8 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <h3>二级批发市场</h3>
       <p class="tc-en">SECONDARY / ORIGIN</p>
       <p class="tc-desc">产地收购码头与城市分销节点，承接一级货源向下分拨，或在一手渔港集货，是供应链的<b>支流</b>。</p>
-      <div class="tc-stats"><b data-count="4">0</b><span>座 · 占 13%</span></div>
-      <div class="tc-tags"><span>江门广海</span><span>汕头和平</span><span>成都青石桥</span></div>
+      <div class="tc-stats"><b data-count="4" data-metric="tier2">0</b><span>座 · 占 <i data-pct="tier2">13</i>%</span></div>
+      <div class="tc-tags"><span>珠海白藤头</span><span>三亚崖州渔港</span><span>柳州新柳邕</span></div>
     </article>
     <article class="tier-card t3 reveal" style="--d:.2s">
       <div class="tc-num">03</div>
@@ -790,8 +800,8 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <h3>三级市场</h3>
       <p class="tc-en">RETAIL TERMINAL</p>
       <p class="tc-desc">面向城区终端的零售型市场，直接服务社区居民与餐饮门店，是供应链的<b>细流</b>。</p>
-      <div class="tc-stats"><b data-count="1">0</b><span>座 · 占 3%</span></div>
-      <div class="tc-tags"><span>青岛埠西</span></div>
+      <div class="tc-stats"><b data-count="1" data-metric="tier3">0</b><span>座 · 占 <i data-pct="tier3">3</i>%</span></div>
+      <div class="tc-tags"><span>青岛埠西</span><span>三亚第一市场</span><span>海口东门市场</span></div>
     </article>
   </div>
 </section>
@@ -801,15 +811,15 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>03 · NATIONAL GRID<i></i></p>
     <h2 class="sec-title">潮汐<em>版图</em></h2>
-    <p class="sec-sub">悬停光点查看市场与其辐射省份；点击进入完整核查档案。</p>
+    <p class="sec-sub">悬停光点查看市场与其辐射省份；点击进入完整核查档案。台账市场高亮其覆盖省份，补充核查市场高亮所在省份。</p>
   </header>
 
   <div class="map-toolbar reveal">
     <div class="map-filters" id="map-filters" role="tablist" aria-label="按级别筛选">
-      <button class="mf active" data-tier="0">全部 <em>30</em></button>
-      <button class="mf" data-tier="1"><i class="dot d1"></i>一级 <em>25</em></button>
-      <button class="mf" data-tier="2"><i class="dot d2"></i>二级 <em>4</em></button>
-      <button class="mf" data-tier="3"><i class="dot d3"></i>三级 <em>1</em></button>
+      <button class="mf active" data-tier="0">全部 <em data-metric="markets">103</em></button>
+      <button class="mf" data-tier="1"><i class="dot d1"></i>一级 <em data-metric="tier1">70</em></button>
+      <button class="mf" data-tier="2"><i class="dot d2"></i>二级 <em data-metric="tier2">30</em></button>
+      <button class="mf" data-tier="3"><i class="dot d3"></i>三级 <em data-metric="tier3">3</em></button>
     </div>
     <div class="map-legend">
       <span><i class="pulse p1"></i>一级 · 主潮</span>
@@ -831,7 +841,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>04 · MARKET DIRECTORY<i></i></p>
     <h2 class="sec-title">三十港<em>名录</em></h2>
-    <p class="sec-sub">搜索、按城市 / 级别 / 品类筛选，点击任一市场展开完整核查档案。</p>
+    <p class="sec-sub">搜索、按城市 / 级别 / 品类 / 数据来源筛选，点击任一市场展开完整核查档案。</p>
   </header>
 
   <div class="dir-controls reveal">
@@ -851,9 +861,15 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
   </div>
   <div class="dir-tiers reveal" id="dir-tier-filters">
     <button class="active" data-tier="0">全部级别</button>
-    <button data-tier="1">一级 <em>25</em></button>
-    <button data-tier="2">二级 <em>4</em></button>
-    <button data-tier="3">三级 <em>1</em></button>
+    <button data-tier="1">一级 <em data-metric="tier1">70</em></button>
+    <button data-tier="2">二级 <em data-metric="tier2">30</em></button>
+    <button data-tier="3">三级 <em data-metric="tier3">3</em></button>
+  </div>
+  <div class="dir-tiers src reveal" id="dir-source-filters">
+    <button class="active" data-src="">全部来源 <em data-metric="markets">103</em></button>
+    <button data-src="ledger">台账市场 <em data-metric="ledger">30</em></button>
+    <button data-src="research">补充核查 <em data-metric="extra">73</em></button>
+    <button data-src="pending">待实地复核 <em data-metric="pending">16</em></button>
   </div>
   <div class="dir-cats reveal" id="dir-cat-filters" aria-label="按品类筛选"></div>
 
@@ -878,7 +894,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     <article class="method-card reveal" style="--d:.1s">
       <span class="m-ico">◉</span>
       <h3>公开资料核查层</h3>
-      <p>市场级别、供应品类与规模数据来自政府公开信息、行业协会与权威媒体报道，逐条标注出处。</p>
+      <p>覆盖 25 个省市的主要批发市场：级别、供应品类与规模数据来自政府公开信息、行业协会与权威媒体报道，逐条标注出处与置信度（高 / 中 / 低）。</p>
       <em>置信度 · 中—高</em>
     </article>
     <article class="method-card reveal" style="--d:.2s">
@@ -901,6 +917,15 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <li><a href="https://nyncw.sh.gov.cn/mtbd/20180705/0009-23849.html" target="_blank" rel="noopener">上海市农委 · 上海水产市场布局</a></li>
       <li><a href="https://www.sina.cn/news/article/comos_nisinhk7818754.html" target="_blank" rel="noopener">公开资料 · 石家庄四大海鲜市场对比</a></li>
       <li><a href="http://static.nfapp.southcn.com/content/201706/11/c475559.html" target="_blank" rel="noopener">南方+ · 广东知名水产批发市场盘点</a></li>
+      <li><a href="https://www.maigoo.com/top/437723.html" target="_blank" rel="noopener">买购网 · 天津十大海鲜批发市场（2026）</a></li>
+      <li><a href="https://www.maigoo.com/top/3DMNOTQ1.html" target="_blank" rel="noopener">买购网 · 安徽十大海鲜批发市场</a></li>
+      <li><a href="https://www.maigoo.com/top/4DMNNzU1.html" target="_blank" rel="noopener">买购网 · 湖南十大水产批发市场</a></li>
+      <li><a href="https://www.lfg.com.cn/Product/Content.aspx?ProductId=314" target="_blank" rel="noopener">辽渔集团 · 大连辽渔国际水产品市场</a></li>
+      <li><a href="https://m.gmw.cn/2025-02/28/content_37876144.htm" target="_blank" rel="noopener">光明网 · 舟山国际水产城</a></li>
+      <li><a href="https://moment.rednet.cn/content/646856/68/14572721.html" target="_blank" rel="noopener">红网 · 长沙 4 家市场入榜全国农产品批发市场行业榜</a></li>
+      <li><a href="https://www.my399.com/2026/05-11/q19yj4x1.html" target="_blank" rel="noopener">哈尔滨新闻网 · 先锋农批市场二期海鲜冻品交易区</a></li>
+      <li><a href="https://www.moa.gov.cn/xw/qg/201409/t20140930_4070471.htm" target="_blank" rel="noopener">农业农村部 · 大连冰鲜贝类交易大厅开张</a></li>
+      <li><a href="https://www.sina.cn/gc/article/nitqkpm2267388.html" target="_blank" rel="noopener">公开资料 · 大连三大海鲜市场实测对比</a></li>
     </ul>
   </div>
 </section>
@@ -2959,6 +2984,3331 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
 
 </script>
 <script>
+/* 自动生成：build_extra.py · 25 省市主要水产批发市场公开资料补充核查（含置信度） */
+window.EXTRA_AUDIT = {
+  sourceNote: '公开资料补充核查（政府公开信息 / 行业协会 / 权威媒体 / 平台榜单）',
+  markets: [
+ {
+  "id": 101,
+  "city": "北京",
+  "provShort": "北京",
+  "prov": "北京市",
+  "name": "北京盛华宏林批发市场",
+  "regName": "北京盛华宏林批发市场",
+  "nameNote": null,
+  "address": "北京市朝阳区十八里店乡",
+  "lng": 116.479,
+  "lat": 39.842,
+  "coverage": [],
+  "provinces": [
+   "北京市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "北京城南大型农产品批发市场，水产品交易区规模居前，辐射京津冀",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货",
+   "贝类",
+   "进口海鲜"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "北京城南大型农产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "北京市·北京·北京盛华宏林批发市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；结论来自公开资料核查（置信度中）；定位：北京城南大型农产品批发市场，水产品交易区规模居前，辐射京津冀。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 102,
+  "city": "北京",
+  "provShort": "北京",
+  "prov": "北京市",
+  "name": "北京新发地农产品批发市场（水产区）",
+  "regName": "北京新发地农产品批发市场（水产区）",
+  "nameNote": null,
+  "address": "北京市丰台区新发地",
+  "lng": 116.342,
+  "lat": 39.813,
+  "coverage": [],
+  "provinces": [
+   "北京市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "全国最大农产品批发市场之一，水产与冻品交易量大",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "全国最大农产品批发市场之一",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "北京市·北京·北京新发地农产品批发市场（水产区）为一级批发市场，主营活鲜、冻品、冰鲜、干货；结论来自公开资料核查（置信度中）；定位：全国最大农产品批发市场之一，水产与冻品交易量大。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 103,
+  "city": "北京",
+  "provShort": "北京",
+  "prov": "北京市",
+  "name": "北京西南郊肉类水产品批发市场",
+  "regName": "北京西南郊肉类水产品批发市场",
+  "nameNote": null,
+  "address": "北京市丰台区南苑路",
+  "lng": 116.386,
+  "lat": 39.836,
+  "coverage": [],
+  "provinces": [
+   "北京市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "以冻品肉类与水产品为主的批发市场",
+  "cats": [
+   "冻品",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "以冻品肉类与水产品为主的批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "北京市·北京·北京西南郊肉类水产品批发市场为二级批发市场，主营冻品、冰鲜、干货；结论来自公开资料核查（置信度中）；定位：以冻品肉类与水产品为主的批发市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 104,
+  "city": "天津",
+  "provShort": "天津",
+  "prov": "天津市",
+  "name": "天津金钟农产品批发市场",
+  "regName": "天津金钟农产品批发市场",
+  "nameNote": null,
+  "address": "天津市东丽区大江路与赵沽里大街交口",
+  "lng": 117.3,
+  "lat": 39.16,
+  "coverage": [],
+  "provinces": [
+   "天津市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "以冷冻水产品批发为主，日均物流量约 9500 吨（公开资料）",
+  "cats": [
+   "冻品",
+   "活鲜",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "以冷冻水产品批发为主",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "天津市·天津·天津金钟农产品批发市场为一级批发市场，主营冻品、活鲜、冰鲜、干货；结论来自公开资料核查（置信度高）；定位：以冷冻水产品批发为主，日均物流量约 9500 吨（公开资料）。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 105,
+  "city": "天津",
+  "provShort": "天津",
+  "prov": "天津市",
+  "name": "天津市红旗农贸综合批发市场",
+  "regName": "天津市红旗农贸综合批发市场",
+  "nameNote": null,
+  "address": "天津市西青区迎水道延长线",
+  "lng": 117.11,
+  "lat": 39.09,
+  "coverage": [],
+  "provinces": [
+   "天津市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "占地 33 万平方米的大型农贸综合市场，设水产专区",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "占地 33 万平方米的大型农贸综合市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "天津市·天津·天津市红旗农贸综合批发市场为一级批发市场，主营活鲜、冻品、冰鲜、干货；结论来自公开资料核查（置信度高）；定位：占地 33 万平方米的大型农贸综合市场，设水产专区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 106,
+  "city": "天津",
+  "provShort": "天津",
+  "prov": "天津市",
+  "name": "天津韩家墅海吉星农产品批发市场",
+  "regName": "天津韩家墅海吉星农产品批发市场",
+  "nameNote": null,
+  "address": "天津市北辰区外环西路与北辰西道交口",
+  "lng": 117.14,
+  "lat": 39.22,
+  "coverage": [],
+  "provinces": [
+   "天津市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "深圳农产品旗下，占地约 950 亩，经营水产等品类",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "深圳农产品旗下",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "天津市·天津·天津韩家墅海吉星农产品批发市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；结论来自公开资料核查（置信度高）；定位：深圳农产品旗下，占地约 950 亩，经营水产等品类。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 107,
+  "city": "天津",
+  "provShort": "天津",
+  "prov": "天津市",
+  "name": "天津中心渔港国家骨干冷链物流基地",
+  "regName": "天津中心渔港国家骨干冷链物流基地",
+  "nameNote": null,
+  "address": "天津市滨海新区中心渔港",
+  "lng": 117.75,
+  "lat": 39.2,
+  "coverage": [],
+  "provinces": [
+   "天津市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "总占地 3087 亩、冷库 93.8 万立方米，北方冷链集散枢纽",
+  "cats": [
+   "冻品",
+   "冰鲜",
+   "进口海鲜",
+   "加工品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "总占地 3087 亩、冷库 93.8 万立方米",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "天津市·天津·天津中心渔港国家骨干冷链物流基地为一级批发市场，主营冻品、冰鲜、进口海鲜、加工品；结论来自公开资料核查（置信度中）；定位：总占地 3087 亩、冷库 93.8 万立方米，北方冷链集散枢纽。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 108,
+  "city": "天津",
+  "provShort": "天津",
+  "prov": "天津市",
+  "name": "天津鑫汇洋水产肉类冻品批发市场",
+  "regName": "天津鑫汇洋水产肉类冻品批发市场",
+  "nameNote": null,
+  "address": "天津市东丽区大毕庄",
+  "lng": 117.26,
+  "lat": 39.19,
+  "coverage": [],
+  "provinces": [
+   "天津市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "水产肉类冻品专业市场，交易大厅约 1.5 万平方米",
+  "cats": [
+   "冻品",
+   "冰鲜",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "水产肉类冻品专业市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "天津市·天津·天津鑫汇洋水产肉类冻品批发市场为二级批发市场，主营冻品、冰鲜、贝类；结论来自公开资料核查（置信度中）；定位：水产肉类冻品专业市场，交易大厅约 1.5 万平方米。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 109,
+  "city": "唐山",
+  "provShort": "河北",
+  "prov": "河北省",
+  "name": "唐山荷花坑农副产品批发市场",
+  "regName": "唐山荷花坑农副产品批发市场",
+  "nameNote": null,
+  "address": "唐山市路南区荷花坑",
+  "lng": 118.17,
+  "lat": 39.62,
+  "coverage": [],
+  "provinces": [
+   "河北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "唐山最大农副产品批发市场，水产交易区服务冀东",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "唐山最大农副产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "河北·唐山·唐山荷花坑农副产品批发市场为一级批发市场，主营活鲜、冻品、冰鲜、河鲜；结论来自公开资料核查（置信度中）；定位：唐山最大农副产品批发市场，水产交易区服务冀东。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 110,
+  "city": "秦皇岛",
+  "provShort": "河北",
+  "prov": "河北省",
+  "name": "秦皇岛海阳农副产品批发市场",
+  "regName": "秦皇岛海阳农副产品批发市场",
+  "nameNote": null,
+  "address": "秦皇岛市海港区海阳路",
+  "lng": 119.58,
+  "lat": 39.95,
+  "coverage": [],
+  "provinces": [
+   "河北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "冀东沿海地区主要水产与农产品集散市场",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "海捕",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "冀东沿海地区主要水产与农产品集散市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "河北·秦皇岛·秦皇岛海阳农副产品批发市场为一级批发市场，主营活鲜、冰鲜、海捕、贝类；结论来自公开资料核查（置信度中）；定位：冀东沿海地区主要水产与农产品集散市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 111,
+  "city": "遵化",
+  "provShort": "河北",
+  "prov": "河北省",
+  "name": "遵化京东农产品智慧物流园",
+  "regName": "遵化京东农产品智慧物流园",
+  "nameNote": null,
+  "address": "唐山市遵化市",
+  "lng": 117.96,
+  "lat": 40.19,
+  "coverage": [],
+  "provinces": [
+   "河北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "中国供销农产品体系物流园，含水产交易区（待实地复核）",
+  "cats": [
+   "冻品",
+   "干货",
+   "活鲜"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "中国供销农产品体系物流园",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "河北·遵化·遵化京东农产品智慧物流园为二级批发市场，主营冻品、干货、活鲜；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 112,
+  "city": "太原",
+  "provShort": "山西",
+  "prov": "山西省",
+  "name": "太原新五龙口海鲜市场",
+  "regName": "太原新五龙口海鲜市场",
+  "nameNote": null,
+  "address": "太原市杏花岭区五龙口",
+  "lng": 112.58,
+  "lat": 37.87,
+  "coverage": [],
+  "provinces": [
+   "山西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "太原规模最大的海鲜批发市场，辐射晋中城市群",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "太原规模最大的海鲜批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "山西·太原·太原新五龙口海鲜市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度高）；定位：太原规模最大的海鲜批发市场，辐射晋中城市群。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 113,
+  "city": "太原",
+  "provShort": "山西",
+  "prov": "山西省",
+  "name": "太原河西农副产品批发市场",
+  "regName": "太原河西农副产品批发市场",
+  "nameNote": null,
+  "address": "太原市万柏林区",
+  "lng": 112.51,
+  "lat": 37.86,
+  "coverage": [],
+  "provinces": [
+   "山西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "太原主要农副产品批发市场，设水产交易区",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "太原主要农副产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "山西·太原·太原河西农副产品批发市场为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：太原主要农副产品批发市场，设水产交易区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 114,
+  "city": "济南",
+  "provShort": "山东",
+  "prov": "山东省",
+  "name": "济南海鲜大市场",
+  "regName": "济南海鲜大市场",
+  "nameNote": null,
+  "address": "济南市历城区",
+  "lng": 117.06,
+  "lat": 36.68,
+  "coverage": [],
+  "provinces": [
+   "山东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "山东内陆规模最大的海鲜批发市场，辐射鲁中鲁北",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "山东内陆规模最大的海鲜批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "山东·济南·济南海鲜大市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度高）；定位：山东内陆规模最大的海鲜批发市场，辐射鲁中鲁北。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 115,
+  "city": "烟台",
+  "provShort": "山东",
+  "prov": "山东省",
+  "name": "烟台九田水产品批发市场",
+  "regName": "烟台九田水产品批发市场",
+  "nameNote": null,
+  "address": "烟台市芝罘区",
+  "lng": 121.36,
+  "lat": 37.53,
+  "coverage": [],
+  "provinces": [
+   "山东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "胶东半岛主要水产品批发市场，一手海捕货源",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "胶东半岛主要水产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "山东·烟台·烟台九田水产品批发市场为一级批发市场，主营海捕、活鲜、冰鲜、贝类；结论来自公开资料核查（置信度中）；定位：胶东半岛主要水产品批发市场，一手海捕货源。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 116,
+  "city": "威海",
+  "provShort": "山东",
+  "prov": "山东省",
+  "name": "威海水产品批发市场",
+  "regName": "威海水产品批发市场",
+  "nameNote": null,
+  "address": "威海市环翠区",
+  "lng": 122.1,
+  "lat": 37.5,
+  "coverage": [],
+  "provinces": [
+   "山东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "山东半岛东端水产品集散市场",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "山东半岛东端水产品集散市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "山东·威海·威海水产品批发市场为一级批发市场，主营海捕、活鲜、冰鲜、贝类；结论来自公开资料核查（置信度中）；定位：山东半岛东端水产品集散市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 117,
+  "city": "日照",
+  "provShort": "山东",
+  "prov": "山东省",
+  "name": "日照石臼水产品批发市场",
+  "regName": "日照石臼水产品批发市场",
+  "nameNote": null,
+  "address": "日照市东港区石臼",
+  "lng": 119.55,
+  "lat": 35.39,
+  "coverage": [],
+  "provinces": [
+   "山东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "日照渔港腹地水产品批发市场（待实地复核）",
+  "cats": [
+   "海捕",
+   "冰鲜",
+   "冻品",
+   "贝类"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "日照渔港腹地水产品批发市场（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "山东·日照·日照石臼水产品批发市场为二级批发市场，主营海捕、冰鲜、冻品、贝类；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 118,
+  "city": "潍坊",
+  "provShort": "山东",
+  "prov": "山东省",
+  "name": "潍坊南下河农贸市场",
+  "regName": "潍坊南下河农贸市场",
+  "nameNote": null,
+  "address": "潍坊市潍城区",
+  "lng": 119.09,
+  "lat": 36.71,
+  "coverage": [],
+  "provinces": [
+   "山东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "潍坊主要农贸批发市场，含水产区（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "潍坊主要农贸批发市场",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "山东·潍坊·潍坊南下河农贸市场为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 119,
+  "city": "郑州",
+  "provShort": "河南",
+  "prov": "河南省",
+  "name": "郑州中部两岸水产海鲜批发市场",
+  "regName": "郑州中部两岸水产海鲜批发市场",
+  "nameNote": null,
+  "address": "郑州市惠济区",
+  "lng": 113.62,
+  "lat": 34.9,
+  "coverage": [],
+  "provinces": [
+   "河南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "郑州主城区水产海鲜批发市场，服务都市圈零售餐饮",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "郑州主城区水产海鲜批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "河南·郑州·郑州中部两岸水产海鲜批发市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度中）；定位：郑州主城区水产海鲜批发市场，服务都市圈零售餐饮。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 120,
+  "city": "洛阳",
+  "provShort": "河南",
+  "prov": "河南省",
+  "name": "洛阳通河农副产品批发市场",
+  "regName": "洛阳通河农副产品批发市场",
+  "nameNote": null,
+  "address": "洛阳市洛龙区",
+  "lng": 112.44,
+  "lat": 34.6,
+  "coverage": [],
+  "provinces": [
+   "河南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "豫西地区主要农副产品批发市场，设水产交易区",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "豫西地区主要农副产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "河南·洛阳·洛阳通河农副产品批发市场为一级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：豫西地区主要农副产品批发市场，设水产交易区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 121,
+  "city": "商丘",
+  "provShort": "河南",
+  "prov": "河南省",
+  "name": "商丘农产品中心批发市场",
+  "regName": "商丘农产品中心批发市场",
+  "nameNote": null,
+  "address": "商丘市梁园区",
+  "lng": 115.65,
+  "lat": 34.44,
+  "coverage": [],
+  "provinces": [
+   "河南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "豫东农产品集散中心，含水产交易区（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "豫东农产品集散中心",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "河南·商丘·商丘农产品中心批发市场为一级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 122,
+  "city": "西安",
+  "provShort": "陕西",
+  "prov": "陕西省",
+  "name": "西安胡家庙海鲜副食批发市场",
+  "regName": "西安胡家庙海鲜副食批发市场",
+  "nameNote": null,
+  "address": "西安市新城区胡家庙",
+  "lng": 108.99,
+  "lat": 34.29,
+  "coverage": [],
+  "provinces": [
+   "陕西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "西安主城区海鲜副食批发集群，服务关中城市群",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "西安主城区海鲜副食批发集群",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "陕西·西安·西安胡家庙海鲜副食批发市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；结论来自公开资料核查（置信度中）；定位：西安主城区海鲜副食批发集群，服务关中城市群。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 123,
+  "city": "西安",
+  "provShort": "陕西",
+  "prov": "陕西省",
+  "name": "西安雨润农产品全球采购中心",
+  "regName": "西安雨润农产品全球采购中心",
+  "nameNote": null,
+  "address": "西安市灞桥区",
+  "lng": 109.05,
+  "lat": 34.33,
+  "coverage": [],
+  "provinces": [
+   "陕西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "西北大型农产品采购中心，水产交易区规模较大",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "西北大型农产品采购中心",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "陕西·西安·西安雨润农产品全球采购中心为一级批发市场，主营活鲜、冻品、冰鲜、干货；结论来自公开资料核查（置信度中）；定位：西北大型农产品采购中心，水产交易区规模较大。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 124,
+  "city": "大连",
+  "provShort": "辽宁",
+  "prov": "辽宁省",
+  "name": "大连辽渔国际水产品市场",
+  "regName": "大连辽渔国际水产品市场",
+  "nameNote": null,
+  "address": "大连市甘井子区大连湾",
+  "lng": 121.65,
+  "lat": 38.98,
+  "coverage": [],
+  "provinces": [
+   "辽宁省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "依托辽渔集团远洋渔业，东北亚水产品集散与交易中心",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "进口海鲜",
+   "加工品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "依托辽渔集团远洋渔业",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "辽宁·大连·大连辽渔国际水产品市场为一级批发市场，主营海捕、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：依托辽渔集团远洋渔业，东北亚水产品集散与交易中心。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 125,
+  "city": "沈阳",
+  "provShort": "辽宁",
+  "prov": "辽宁省",
+  "name": "沈阳润恒国际农副产品交易中心",
+  "regName": "沈阳润恒国际农副产品交易中心",
+  "nameNote": null,
+  "address": "沈阳市于洪区",
+  "lng": 123.31,
+  "lat": 41.83,
+  "coverage": [],
+  "provinces": [
+   "辽宁省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "东北大型农副产品交易中心，水产冻品板块规模居前",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "东北大型农副产品交易中心",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "辽宁·沈阳·沈阳润恒国际农副产品交易中心为一级批发市场，主营活鲜、冻品、冰鲜、干货；结论来自公开资料核查（置信度中）；定位：东北大型农副产品交易中心，水产冻品板块规模居前。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 126,
+  "city": "丹东",
+  "provShort": "辽宁",
+  "prov": "辽宁省",
+  "name": "丹东黄海大市场（水产品交易区）",
+  "regName": "丹东黄海大市场（水产品交易区）",
+  "nameNote": null,
+  "address": "丹东市振兴区",
+  "lng": 124.36,
+  "lat": 40.02,
+  "coverage": [],
+  "provinces": [
+   "辽宁省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "鸭绿江口海产品集散市场（待实地复核）",
+  "cats": [
+   "海捕",
+   "冰鲜",
+   "活鲜",
+   "贝类"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "鸭绿江口海产品集散市场（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "辽宁·丹东·丹东黄海大市场（水产品交易区）为二级批发市场，主营海捕、冰鲜、活鲜、贝类；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 127,
+  "city": "长春",
+  "provShort": "吉林",
+  "prov": "吉林省",
+  "name": "长春长白路农贸水产市场",
+  "regName": "长春长白路农贸水产市场",
+  "nameNote": null,
+  "address": "长春市宽城区长白路（东广场地铁站旁）",
+  "lng": 125.343,
+  "lat": 43.91,
+  "coverage": [],
+  "provinces": [
+   "吉林省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "长春规模最大的水产批发市场，辐射吉林中部",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "长春规模最大的水产批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "场址级",
+    "source": "坐标库",
+    "conf": "高"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "吉林·长春·长春长白路农贸水产市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；结论来自公开资料核查（置信度高）；定位：长春规模最大的水产批发市场，辐射吉林中部。",
+  "coordPrecision": "site"
+ },
+ {
+  "id": 128,
+  "city": "长春",
+  "provShort": "吉林",
+  "prov": "吉林省",
+  "name": "长春东北亚农产品批发市场",
+  "regName": "长春东北亚农产品批发市场",
+  "nameNote": null,
+  "address": "长春市绿园区",
+  "lng": 125.24,
+  "lat": 43.9,
+  "coverage": [],
+  "provinces": [
+   "吉林省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "长春农副产品批发市场，含水产交易区（待实地复核）",
+  "cats": [
+   "冻品",
+   "干货",
+   "河鲜"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "长春农副产品批发市场",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "吉林·长春·长春东北亚农产品批发市场为二级批发市场，主营冻品、干货、河鲜；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 129,
+  "city": "哈尔滨",
+  "provShort": "黑龙江",
+  "prov": "黑龙江省",
+  "name": "哈尔滨先锋农副产品批发市场",
+  "regName": "哈尔滨先锋农副产品批发市场",
+  "nameNote": null,
+  "address": "哈尔滨市道外区先锋路",
+  "lng": 126.68,
+  "lat": 45.74,
+  "coverage": [],
+  "provinces": [
+   "黑龙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "哈尔滨最大农产品批发市场，二期设海鲜与冻品交易区",
+  "cats": [
+   "冻品",
+   "冰鲜",
+   "活鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "哈尔滨最大农产品批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "黑龙·哈尔滨·哈尔滨先锋农副产品批发市场为一级批发市场，主营冻品、冰鲜、活鲜、干货；结论来自公开资料核查（置信度高）；定位：哈尔滨最大农产品批发市场，二期设海鲜与冻品交易区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 130,
+  "city": "哈尔滨",
+  "provShort": "黑龙江",
+  "prov": "黑龙江省",
+  "name": "哈尔滨哈达农副产品批发市场",
+  "regName": "哈尔滨哈达农副产品批发市场",
+  "nameNote": null,
+  "address": "哈尔滨市南岗区",
+  "lng": 126.6,
+  "lat": 45.7,
+  "coverage": [],
+  "provinces": [
+   "黑龙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "哈尔滨主要农副产品批发市场之一",
+  "cats": [
+   "冻品",
+   "活鲜",
+   "干货",
+   "河鲜"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "哈尔滨主要农副产品批发市场之一",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "黑龙·哈尔滨·哈尔滨哈达农副产品批发市场为二级批发市场，主营冻品、活鲜、干货、河鲜；结论来自公开资料核查（置信度中）；定位：哈尔滨主要农副产品批发市场之一。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 131,
+  "city": "上海",
+  "provShort": "上海",
+  "prov": "上海市",
+  "name": "上海东方国际水产中心",
+  "regName": "上海东方国际水产中心",
+  "nameNote": null,
+  "address": "上海市杨浦区军工路",
+  "lng": 121.55,
+  "lat": 31.28,
+  "coverage": [],
+  "provinces": [
+   "上海市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "上海中心城区最大水产批发市场，进口海鲜集散",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "进口海鲜",
+   "加工品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "上海中心城区最大水产批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "上海市·上海·上海东方国际水产中心为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度高）；定位：上海中心城区最大水产批发市场，进口海鲜集散。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 132,
+  "city": "上海",
+  "provShort": "上海",
+  "prov": "上海市",
+  "name": "上海江杨农产品批发市场",
+  "regName": "上海江杨农产品批发市场",
+  "nameNote": null,
+  "address": "上海市宝山区江杨南路",
+  "lng": 121.45,
+  "lat": 31.32,
+  "coverage": [],
+  "provinces": [
+   "上海市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "上海北部大型农产品批发市场，水产交易区规模居前",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "上海北部大型农产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "上海市·上海·上海江杨农产品批发市场为一级批发市场，主营活鲜、冻品、冰鲜、河鲜；结论来自公开资料核查（置信度中）；定位：上海北部大型农产品批发市场，水产交易区规模居前。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 133,
+  "city": "常州",
+  "provShort": "江苏",
+  "prov": "江苏省",
+  "name": "常州凌家塘农副产品批发市场",
+  "regName": "常州凌家塘农副产品批发市场",
+  "nameNote": null,
+  "address": "常州市钟楼区凌家塘",
+  "lng": 119.87,
+  "lat": 31.79,
+  "coverage": [],
+  "provinces": [
+   "江苏省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "华东大型农副产品批发市场，水产交易量居全国前列",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "华东大型农副产品批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "江苏·常州·常州凌家塘农副产品批发市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；结论来自公开资料核查（置信度高）；定位：华东大型农副产品批发市场，水产交易量居全国前列。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 134,
+  "city": "连云港",
+  "provShort": "江苏",
+  "prov": "江苏省",
+  "name": "连云港苏鲁海产品综合批发市场",
+  "regName": "连云港苏鲁海产品综合批发市场",
+  "nameNote": null,
+  "address": "连云港市赣榆区",
+  "lng": 119.13,
+  "lat": 34.83,
+  "coverage": [],
+  "provinces": [
+   "江苏省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "苏鲁交界海产品综合批发市场，一手海捕货源",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "苏鲁交界海产品综合批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "江苏·连云港·连云港苏鲁海产品综合批发市场为一级批发市场，主营海捕、活鲜、冰鲜、贝类；结论来自公开资料核查（置信度中）；定位：苏鲁交界海产品综合批发市场，一手海捕货源。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 135,
+  "city": "徐州",
+  "provShort": "江苏",
+  "prov": "江苏省",
+  "name": "徐州雨润农副产品全球采购中心",
+  "regName": "徐州雨润农副产品全球采购中心",
+  "nameNote": null,
+  "address": "徐州市泉山区",
+  "lng": 117.14,
+  "lat": 34.24,
+  "coverage": [],
+  "provinces": [
+   "江苏省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "淮海经济区农产品采购中心（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "淮海经济区农产品采购中心（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "江苏·徐州·徐州雨润农副产品全球采购中心为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 136,
+  "city": "舟山",
+  "provShort": "浙江",
+  "prov": "浙江省",
+  "name": "舟山国际水产城",
+  "regName": "舟山国际水产城",
+  "nameNote": null,
+  "address": "舟山市普陀区沈家门",
+  "lng": 122.3,
+  "lat": 29.94,
+  "coverage": [],
+  "provinces": [
+   "浙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "全国最大渔港水产品交易市场之一，远洋与近海捕捞集散",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货",
+   "加工品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "全国最大渔港水产品交易市场之一",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "浙江·舟山·舟山国际水产城为一级批发市场，主营海捕、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：全国最大渔港水产品交易市场之一，远洋与近海捕捞集散。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 137,
+  "city": "宁波",
+  "provShort": "浙江",
+  "prov": "浙江省",
+  "name": "宁波水产品批发市场",
+  "regName": "宁波水产品批发市场",
+  "nameNote": null,
+  "address": "宁波市江北区",
+  "lng": 121.55,
+  "lat": 29.9,
+  "coverage": [],
+  "provinces": [
+   "浙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "宁波规模最大的水产品批发市场，辐射浙东",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "宁波规模最大的水产品批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "浙江·宁波·宁波水产品批发市场为一级批发市场，主营海捕、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：宁波规模最大的水产品批发市场，辐射浙东。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 138,
+  "city": "温州",
+  "provShort": "浙江",
+  "prov": "浙江省",
+  "name": "温州菜篮子水产品批发市场",
+  "regName": "温州菜篮子水产品批发市场",
+  "nameNote": null,
+  "address": "温州市龙湾区",
+  "lng": 120.83,
+  "lat": 27.94,
+  "coverage": [],
+  "provinces": [
+   "浙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "浙南地区主要水产品集散市场",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "浙南地区主要水产品集散市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "浙江·温州·温州菜篮子水产品批发市场为一级批发市场，主营海捕、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度中）；定位：浙南地区主要水产品集散市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 139,
+  "city": "金华",
+  "provShort": "浙江",
+  "prov": "浙江省",
+  "name": "金华农产品批发市场",
+  "regName": "金华农产品批发市场",
+  "nameNote": null,
+  "address": "金华市金东区",
+  "lng": 119.7,
+  "lat": 29.1,
+  "coverage": [],
+  "provinces": [
+   "浙江省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "浙中农产品批发市场，设水产交易区（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "浙中农产品批发市场",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "浙江·金华·金华农产品批发市场为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 140,
+  "city": "泉州",
+  "provShort": "福建",
+  "prov": "福建省",
+  "name": "泉州华洲水产批发市场",
+  "regName": "泉州华洲水产批发市场",
+  "nameNote": null,
+  "address": "泉州市丰泽区",
+  "lng": 118.6,
+  "lat": 24.89,
+  "coverage": [],
+  "provinces": [
+   "福建省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "闽南规模最大的水产批发市场之一，辐射闽西南",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "闽南规模最大的水产批发市场之一",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "福建·泉州·泉州华洲水产批发市场为一级批发市场，主营海捕、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：闽南规模最大的水产批发市场之一，辐射闽西南。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 141,
+  "city": "漳州",
+  "provShort": "福建",
+  "prov": "福建省",
+  "name": "漳州海峡农博汇",
+  "regName": "漳州海峡农博汇",
+  "nameNote": null,
+  "address": "漳州市龙文区",
+  "lng": 117.71,
+  "lat": 24.51,
+  "coverage": [],
+  "provinces": [
+   "福建省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "漳州农产品物流城，水产品交易板块规模居前",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "漳州农产品物流城",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "福建·漳州·漳州海峡农博汇为一级批发市场，主营活鲜、冰鲜、冻品、干货；结论来自公开资料核查（置信度中）；定位：漳州农产品物流城，水产品交易板块规模居前。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 142,
+  "city": "宁德",
+  "provShort": "福建",
+  "prov": "福建省",
+  "name": "宁德市水产品批发市场",
+  "regName": "宁德市水产品批发市场",
+  "nameNote": null,
+  "address": "宁德市蕉城区",
+  "lng": 119.53,
+  "lat": 26.67,
+  "coverage": [],
+  "provinces": [
+   "福建省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "闽东大黄鱼产区水产品集散市场（待实地复核）",
+  "cats": [
+   "海捕",
+   "冰鲜",
+   "活鲜",
+   "贝类"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "闽东大黄鱼产区水产品集散市场（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "福建·宁德·宁德市水产品批发市场为二级批发市场，主营海捕、冰鲜、活鲜、贝类；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 143,
+  "city": "南昌",
+  "provShort": "江西",
+  "prov": "江西省",
+  "name": "南昌赣昌水产品综合大市场",
+  "regName": "南昌赣昌水产品综合大市场",
+  "nameNote": null,
+  "address": "南昌市青山湖区",
+  "lng": 115.95,
+  "lat": 28.71,
+  "coverage": [],
+  "provinces": [
+   "江西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "江西规模最大的水产品综合批发市场，辐射全省",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "江西规模最大的水产品综合批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "江西·南昌·南昌赣昌水产品综合大市场为一级批发市场，主营活鲜、冻品、冰鲜、河鲜；结论来自公开资料核查（置信度高）；定位：江西规模最大的水产品综合批发市场，辐射全省。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 144,
+  "city": "南昌",
+  "provShort": "江西",
+  "prov": "江西省",
+  "name": "江西水产品交易市场",
+  "regName": "江西水产品交易市场",
+  "nameNote": null,
+  "address": "南昌市青云谱区",
+  "lng": 115.9,
+  "lat": 28.63,
+  "coverage": [],
+  "provinces": [
+   "江西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "江西省级水产品交易平台，以淡水鱼与冻品为主",
+  "cats": [
+   "活鲜",
+   "河鲜",
+   "冻品",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "江西省级水产品交易平台",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "江西·南昌·江西水产品交易市场为二级批发市场，主营活鲜、河鲜、冻品、干货；结论来自公开资料核查（置信度中）；定位：江西省级水产品交易平台，以淡水鱼与冻品为主。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 145,
+  "city": "九江",
+  "provShort": "江西",
+  "prov": "江西省",
+  "name": "九江琵琶湖农产品批发市场",
+  "regName": "九江琵琶湖农产品批发市场",
+  "nameNote": null,
+  "address": "九江市浔阳区",
+  "lng": 116.0,
+  "lat": 29.72,
+  "coverage": [],
+  "provinces": [
+   "江西省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "赣北农产品批发市场，含水产交易区（待实地复核）",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冻品"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "赣北农产品批发市场",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "江西·九江·九江琵琶湖农产品批发市场为二级批发市场，主营河鲜、活鲜、冻品；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 146,
+  "city": "荆州",
+  "provShort": "湖北",
+  "prov": "湖北省",
+  "name": "荆州两湖绿谷农产品批发市场",
+  "regName": "荆州两湖绿谷农产品批发市场",
+  "nameNote": null,
+  "address": "荆州市荆州区",
+  "lng": 112.2,
+  "lat": 30.36,
+  "coverage": [],
+  "provinces": [
+   "湖北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "华中大型农产品物流市场，淡水鱼交易量全国居前",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "华中大型农产品物流市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "湖北·荆州·荆州两湖绿谷农产品批发市场为一级批发市场，主营河鲜、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：华中大型农产品物流市场，淡水鱼交易量全国居前。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 147,
+  "city": "宜昌",
+  "provShort": "湖北",
+  "prov": "湖北省",
+  "name": "宜昌三峡物流园农产品市场",
+  "regName": "宜昌三峡物流园农产品市场",
+  "nameNote": null,
+  "address": "宜昌市猇亭区",
+  "lng": 111.42,
+  "lat": 30.55,
+  "coverage": [],
+  "provinces": [
+   "湖北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "三峡区域农产品集散中心，设水产交易区",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冻品",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "三峡区域农产品集散中心",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "湖北·宜昌·宜昌三峡物流园农产品市场为二级批发市场，主营河鲜、活鲜、冻品、干货；结论来自公开资料核查（置信度中）；定位：三峡区域农产品集散中心，设水产交易区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 148,
+  "city": "襄阳",
+  "provShort": "湖北",
+  "prov": "湖北省",
+  "name": "襄阳四季青农副产品批发市场",
+  "regName": "襄阳四季青农副产品批发市场",
+  "nameNote": null,
+  "address": "襄阳市樊城区",
+  "lng": 112.11,
+  "lat": 32.05,
+  "coverage": [],
+  "provinces": [
+   "湖北省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "鄂西北农产品批发市场（待实地复核）",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冻品"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "鄂西北农产品批发市场（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "湖北·襄阳·襄阳四季青农副产品批发市场为二级批发市场，主营河鲜、活鲜、冻品；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 149,
+  "city": "长沙",
+  "provShort": "湖南",
+  "prov": "湖南省",
+  "name": "长沙海吉星国际农产品物流园（原马王堆市场）",
+  "regName": "长沙海吉星国际农产品物流园（原马王堆市场）",
+  "nameNote": null,
+  "address": "长沙市长沙县黄兴镇",
+  "lng": 113.06,
+  "lat": 28.06,
+  "coverage": [],
+  "provinces": [
+   "湖南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "原马王堆市场整体搬迁升级，湖南规模最大的农产品批发市场",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "原马王堆市场整体搬迁升级",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "湖南·长沙·长沙海吉星国际农产品物流园（原马王堆市场）为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；结论来自公开资料核查（置信度高）；定位：原马王堆市场整体搬迁升级，湖南规模最大的农产品批发市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 150,
+  "city": "长沙",
+  "provShort": "湖南",
+  "prov": "湖南省",
+  "name": "长沙红星农副产品大市场",
+  "regName": "长沙红星农副产品大市场",
+  "nameNote": null,
+  "address": "长沙市雨花区",
+  "lng": 113.02,
+  "lat": 28.11,
+  "coverage": [],
+  "provinces": [
+   "湖南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "全国农产品批发市场百强，水产与冻品交易量大",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "全国农产品批发市场百强",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "湖南·长沙·长沙红星农副产品大市场为一级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：全国农产品批发市场百强，水产与冻品交易量大。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 151,
+  "city": "岳阳",
+  "provShort": "湖南",
+  "prov": "湖南省",
+  "name": "岳阳洞庭渔都水产品批发市场",
+  "regName": "岳阳洞庭渔都水产品批发市场",
+  "nameNote": null,
+  "address": "岳阳市岳阳楼区",
+  "lng": 113.11,
+  "lat": 29.37,
+  "coverage": [],
+  "provinces": [
+   "湖南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "洞庭湖产区水产品集散市场",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冰鲜"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "洞庭湖产区水产品集散市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "湖南·岳阳·岳阳洞庭渔都水产品批发市场为二级批发市场，主营河鲜、活鲜、冰鲜；结论来自公开资料核查（置信度中）；定位：洞庭湖产区水产品集散市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 152,
+  "city": "深圳",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "深圳布吉海鲜批发市场",
+  "regName": "深圳布吉海鲜批发市场",
+  "nameNote": null,
+  "address": "深圳市龙岗区布吉",
+  "lng": 114.12,
+  "lat": 22.6,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "深圳交易规模领先的海鲜批发市场，冰鲜鱼占深圳消费量八成以上",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "深圳交易规模领先的海鲜批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "广东·深圳·深圳布吉海鲜批发市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度中）；定位：深圳交易规模领先的海鲜批发市场，冰鲜鱼占深圳消费量八成以上。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 153,
+  "city": "佛山",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "佛山南海环球水产交易中心",
+  "regName": "佛山南海环球水产交易中心",
+  "nameNote": null,
+  "address": "佛山市南海区盐步",
+  "lng": 113.16,
+  "lat": 23.09,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "珠三角腹地专业水产交易中心，「六区一中心」格局",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "珠三角腹地专业水产交易中心",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "广东·佛山·佛山南海环球水产交易中心为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；结论来自公开资料核查（置信度高）；定位：珠三角腹地专业水产交易中心，「六区一中心」格局。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 154,
+  "city": "湛江",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "湛江霞山水产品批发市场",
+  "regName": "湛江霞山水产品批发市场",
+  "nameNote": null,
+  "address": "湛江市霞山区",
+  "lng": 110.4,
+  "lat": 21.19,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "全国最大对虾交易集散地之一，粤西规模最大水产品市场",
+  "cats": [
+   "海捕",
+   "冻品",
+   "活鲜",
+   "冰鲜",
+   "贝类",
+   "加工品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "全国最大对虾交易集散地之一",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "广东·湛江·湛江霞山水产品批发市场为一级批发市场，主营海捕、冻品、活鲜、冰鲜；结论来自公开资料核查（置信度高）；定位：全国最大对虾交易集散地之一，粤西规模最大水产品市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 155,
+  "city": "东莞",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "东莞东城金桥水产批发市场",
+  "regName": "东莞东城金桥水产批发市场",
+  "nameNote": null,
+  "address": "东莞市东城区",
+  "lng": 113.78,
+  "lat": 23.03,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "东莞最大水产批发市场，四大家鱼日成交量超百万斤",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冰鲜",
+   "冻品"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "东莞最大水产批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "广东·东莞·东莞东城金桥水产批发市场为一级批发市场，主营河鲜、活鲜、冰鲜、冻品；结论来自公开资料核查（置信度高）；定位：东莞最大水产批发市场，四大家鱼日成交量超百万斤。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 156,
+  "city": "珠海",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "珠海白藤头水产批发市场",
+  "regName": "珠海白藤头水产批发市场",
+  "nameNote": null,
+  "address": "珠海市斗门区白藤头",
+  "lng": 113.3,
+  "lat": 22.16,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "珠海西区最大的海鲜批发市场",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "海捕",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "珠海西区最大的海鲜批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "广东·珠海·珠海白藤头水产批发市场为二级批发市场，主营活鲜、冰鲜、海捕、贝类；结论来自公开资料核查（置信度高）；定位：珠海西区最大的海鲜批发市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 157,
+  "city": "广州",
+  "provShort": "广东",
+  "prov": "广东省",
+  "name": "广州番禺水产品交易市场",
+  "regName": "广州番禺水产品交易市场",
+  "nameNote": null,
+  "address": "广州市番禺区",
+  "lng": 113.38,
+  "lat": 22.94,
+  "coverage": [],
+  "provinces": [
+   "广东省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "珠江三角洲塘鱼与优质水产品交易市场",
+  "cats": [
+   "河鲜",
+   "活鲜",
+   "冰鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "珠江三角洲塘鱼与优质水产品交易市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "广东·广州·广州番禺水产品交易市场为二级批发市场，主营河鲜、活鲜、冰鲜、干货；结论来自公开资料核查（置信度中）；定位：珠江三角洲塘鱼与优质水产品交易市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 158,
+  "city": "南宁",
+  "provShort": "广西",
+  "prov": "广西壮族自治区",
+  "name": "广西金桥国际海鲜水产城",
+  "regName": "广西金桥国际海鲜水产城",
+  "nameNote": null,
+  "address": "南宁市",
+  "lng": 108.3,
+  "lat": 22.85,
+  "coverage": [],
+  "provinces": [
+   "广西壮族自治区"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "广西重点建设的国际海鲜水产交易平台，服务东盟贸易",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "贝类",
+   "进口海鲜"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "广西重点建设的国际海鲜水产交易平台",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "广西壮族自治区·南宁·广西金桥国际海鲜水产城为一级批发市场，主营活鲜、冰鲜、冻品、贝类；结论来自公开资料核查（置信度高）；定位：广西重点建设的国际海鲜水产交易平台，服务东盟贸易。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 159,
+  "city": "北海",
+  "provShort": "广西",
+  "prov": "广西壮族自治区",
+  "name": "北海侨港水产品批发市场",
+  "regName": "北海侨港水产品批发市场",
+  "nameNote": null,
+  "address": "北海市银海区侨港镇",
+  "lng": 109.12,
+  "lat": 21.44,
+  "coverage": [],
+  "provinces": [
+   "广西壮族自治区"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "北部湾渔港水产品集散市场",
+  "cats": [
+   "海捕",
+   "冰鲜",
+   "活鲜",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "北部湾渔港水产品集散市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "广西壮族自治区·北海·北海侨港水产品批发市场为二级批发市场，主营海捕、冰鲜、活鲜、贝类；结论来自公开资料核查（置信度中）；定位：北部湾渔港水产品集散市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 160,
+  "city": "柳州",
+  "provShort": "广西",
+  "prov": "广西壮族自治区",
+  "name": "柳州新柳邕农产品批发市场",
+  "regName": "柳州新柳邕农产品批发市场",
+  "nameNote": null,
+  "address": "柳州市柳南区",
+  "lng": 109.38,
+  "lat": 24.29,
+  "coverage": [],
+  "provinces": [
+   "广西壮族自治区"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "桂中农产品批发市场，设水产交易区",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "桂中农产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "广西壮族自治区·柳州·柳州新柳邕农产品批发市场为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：桂中农产品批发市场，设水产交易区。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 161,
+  "city": "海口",
+  "provShort": "海南",
+  "prov": "海南省",
+  "name": "海口新港水产码头批发市场",
+  "regName": "海口新港水产码头批发市场",
+  "nameNote": null,
+  "address": "海口市龙华区新港",
+  "lng": 110.32,
+  "lat": 20.05,
+  "coverage": [],
+  "provinces": [
+   "海南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "海南规模最大的水产批发集散市场之一",
+  "cats": [
+   "海捕",
+   "活鲜",
+   "冰鲜",
+   "贝类",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "海南规模最大的水产批发集散市场之一",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "海南·海口·海口新港水产码头批发市场为一级批发市场，主营海捕、活鲜、冰鲜、贝类；结论来自公开资料核查（置信度中）；定位：海南规模最大的水产批发集散市场之一。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 162,
+  "city": "海口",
+  "provShort": "海南",
+  "prov": "海南省",
+  "name": "海口东门市场",
+  "regName": "海口东门市场",
+  "nameNote": null,
+  "address": "海口市美兰区博爱南路",
+  "lng": 110.35,
+  "lat": 20.04,
+  "coverage": [],
+  "provinces": [
+   "海南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 3,
+  "tierLabel": "三级市场",
+  "scale": "海口老城区终端海鲜零售市场",
+  "cats": [
+   "活鲜",
+   "海捕",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "海口老城区终端海鲜零售市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "海南·海口·海口东门市场为三级市场，主营活鲜、海捕、贝类；结论来自公开资料核查（置信度中）；定位：海口老城区终端海鲜零售市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 163,
+  "city": "三亚",
+  "provShort": "海南",
+  "prov": "海南省",
+  "name": "三亚第一市场",
+  "regName": "三亚第一市场",
+  "nameNote": null,
+  "address": "三亚市天涯区解放路",
+  "lng": 109.51,
+  "lat": 18.25,
+  "coverage": [],
+  "provinces": [
+   "海南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 3,
+  "tierLabel": "三级市场",
+  "scale": "三亚最主要的终端海鲜零售市场",
+  "cats": [
+   "活鲜",
+   "海捕",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "三亚最主要的终端海鲜零售市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "海南·三亚·三亚第一市场为三级市场，主营活鲜、海捕、贝类；结论来自公开资料核查（置信度中）；定位：三亚最主要的终端海鲜零售市场。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 164,
+  "city": "三亚",
+  "provShort": "海南",
+  "prov": "海南省",
+  "name": "三亚崖州中心渔港水产品交易中心",
+  "regName": "三亚崖州中心渔港水产品交易中心",
+  "nameNote": null,
+  "address": "三亚市崖州区",
+  "lng": 109.17,
+  "lat": 18.36,
+  "coverage": [],
+  "provinces": [
+   "海南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "南海渔港型水产品交易中心",
+  "cats": [
+   "海捕",
+   "冰鲜",
+   "冻品",
+   "活鲜"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "南海渔港型水产品交易中心",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "海南·三亚·三亚崖州中心渔港水产品交易中心为一级批发市场，主营海捕、冰鲜、冻品、活鲜；结论来自公开资料核查（置信度中）；定位：南海渔港型水产品交易中心。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 165,
+  "city": "重庆",
+  "provShort": "重庆",
+  "prov": "重庆市",
+  "name": "重庆双福国际农贸城",
+  "regName": "重庆双福国际农贸城",
+  "nameNote": null,
+  "address": "重庆市江津区双福",
+  "lng": 106.3,
+  "lat": 29.42,
+  "coverage": [],
+  "provinces": [
+   "重庆市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "西南地区规模最大的农贸物流城之一，水产交易量大",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "冰鲜",
+   "河鲜",
+   "干货",
+   "贝类"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "西南地区规模最大的农贸物流城之一",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "S",
+  "conclusion": "重庆市·重庆·重庆双福国际农贸城为一级批发市场，主营活鲜、冻品、冰鲜、河鲜；结论来自公开资料核查（置信度高）；定位：西南地区规模最大的农贸物流城之一，水产交易量大。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 166,
+  "city": "涪陵",
+  "provShort": "重庆",
+  "prov": "重庆市",
+  "name": "重庆涪陵新大兴国际农副产品交易中心",
+  "regName": "重庆涪陵新大兴国际农副产品交易中心",
+  "nameNote": null,
+  "address": "重庆市涪陵区",
+  "lng": 107.39,
+  "lat": 29.7,
+  "coverage": [],
+  "provinces": [
+   "重庆市"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "渝东农产品交易中心，设水产交易板块",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "渝东农产品交易中心",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "重庆市·涪陵·重庆涪陵新大兴国际农副产品交易中心为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：渝东农产品交易中心，设水产交易板块。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 167,
+  "city": "成都",
+  "provShort": "四川",
+  "prov": "四川省",
+  "name": "成都白家农产品批发市场",
+  "regName": "成都白家农产品批发市场",
+  "nameNote": null,
+  "address": "成都市双流区白家",
+  "lng": 104.0,
+  "lat": 30.55,
+  "coverage": [],
+  "provinces": [
+   "四川省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "成都主要农产品批发市场，水产交易量居西南前列",
+  "cats": [
+   "活鲜",
+   "冰鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "成都主要农产品批发市场",
+    "source": "公开资料",
+    "conf": "高"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "四川·成都·成都白家农产品批发市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；结论来自公开资料核查（置信度高）；定位：成都主要农产品批发市场，水产交易量居西南前列。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 168,
+  "city": "泸州",
+  "provShort": "四川",
+  "prov": "四川省",
+  "name": "泸州海吉星农产品商贸物流园",
+  "regName": "泸州海吉星农产品商贸物流园",
+  "nameNote": null,
+  "address": "泸州市龙马潭区",
+  "lng": 105.44,
+  "lat": 28.9,
+  "coverage": [],
+  "provinces": [
+   "四川省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "川南农产品物流园（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "川南农产品物流园（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "四川·泸州·泸州海吉星农产品商贸物流园为二级批发市场，主营活鲜、冻品、河鲜；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 169,
+  "city": "贵阳",
+  "provShort": "贵州",
+  "prov": "贵州省",
+  "name": "贵阳石板农产品物流园",
+  "regName": "贵阳石板农产品物流园",
+  "nameNote": null,
+  "address": "贵阳市花溪区石板镇",
+  "lng": 106.66,
+  "lat": 26.44,
+  "coverage": [],
+  "provinces": [
+   "贵州省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "贵州规模最大的农产品物流园，水产板块集散全省",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "贵州规模最大的农产品物流园",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "A",
+  "conclusion": "贵州·贵阳·贵阳石板农产品物流园为一级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：贵州规模最大的农产品物流园，水产板块集散全省。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 170,
+  "city": "遵义",
+  "provShort": "贵州",
+  "prov": "贵州省",
+  "name": "遵义海风井农产品批发市场",
+  "regName": "遵义海风井农产品批发市场",
+  "nameNote": null,
+  "address": "遵义市红花岗区",
+  "lng": 106.92,
+  "lat": 27.71,
+  "coverage": [],
+  "provinces": [
+   "贵州省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "黔北农产品批发市场（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "黔北农产品批发市场（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "贵州·遵义·遵义海风井农产品批发市场为二级批发市场，主营活鲜、冻品、河鲜；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 171,
+  "city": "大理",
+  "provShort": "云南",
+  "prov": "云南省",
+  "name": "大理泰兴农副产品批发市场",
+  "regName": "大理泰兴农副产品批发市场",
+  "nameNote": null,
+  "address": "大理市",
+  "lng": 100.23,
+  "lat": 25.6,
+  "coverage": [],
+  "provinces": [
+   "云南省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "滇西农产品批发市场，含水产交易区（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "滇西农产品批发市场",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "云南·大理·大理泰兴农副产品批发市场为二级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 172,
+  "city": "芜湖",
+  "provShort": "安徽",
+  "prov": "安徽省",
+  "name": "芜湖大地农副产品批发市场",
+  "regName": "芜湖大地农副产品批发市场",
+  "nameNote": null,
+  "address": "芜湖市鸠江区",
+  "lng": 118.42,
+  "lat": 31.37,
+  "coverage": [],
+  "provinces": [
+   "安徽省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 1,
+  "tierLabel": "一级批发市场",
+  "scale": "皖南主要农副产品批发市场，水产交易区规模居前",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜",
+   "干货"
+  ],
+  "status": "已核查·公开资料",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "皖南主要农副产品批发市场",
+    "source": "公开资料",
+    "conf": "中"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "B",
+  "conclusion": "安徽·芜湖·芜湖大地农副产品批发市场为一级批发市场，主营活鲜、冻品、河鲜、干货；结论来自公开资料核查（置信度中）；定位：皖南主要农副产品批发市场，水产交易区规模居前。",
+  "coordPrecision": "city"
+ },
+ {
+  "id": 173,
+  "city": "蚌埠",
+  "provShort": "安徽",
+  "prov": "安徽省",
+  "name": "蚌埠海吉星农产品物流中心",
+  "regName": "蚌埠海吉星农产品物流中心",
+  "nameNote": null,
+  "address": "蚌埠市淮上区",
+  "lng": 117.34,
+  "lat": 32.97,
+  "coverage": [],
+  "provinces": [
+   "安徽省"
+  ],
+  "plan": null,
+  "source": "research",
+  "tier": 2,
+  "tierLabel": "二级批发市场",
+  "scale": "皖北农产品物流中心（待实地复核）",
+  "cats": [
+   "活鲜",
+   "冻品",
+   "河鲜"
+  ],
+  "status": "待实地复核",
+  "figures": [
+   {
+    "label": "市场定位",
+    "value": "皖北农产品物流中心（待实地复核）",
+    "source": "公开资料",
+    "conf": "低"
+   },
+   {
+    "label": "坐标精度",
+    "value": "城市级（估算）",
+    "source": "坐标库",
+    "conf": "中"
+   }
+  ],
+  "grade": "C",
+  "conclusion": "安徽·蚌埠·蚌埠海吉星农产品物流中心为二级批发市场，主营活鲜、冻品、河鲜；结论来自公开资料核查（置信度低），建议实地复核交易时间与商户结构。",
+  "coordPrecision": "city"
+ }
+]
+};
+
+</script>
+<script>
 /* ═══════════════════════════════════════════════════════════════
    深海潮汐 · WebGL 全屏海面着色器
    FBM 域扭曲海浪 + 月光高光 + 峰顶泡沫 + 颗粒暗角
@@ -3146,6 +6496,59 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
   var GRADE_CLS = { S: "gS", A: "gA", B: "gB", C: "gC" };
   var GRADE_NAME = { S: "战略级", A: "强覆盖", B: "标准型", C: "补充型" };
 
+  /* ─────────── 数据合并：台账市场 + 公开资料补充核查 ─────────── */
+  var LEDGER = A.markets.slice();
+  var LEDGER_COUNT = LEDGER.length;
+  var EXTRA = (window.EXTRA_AUDIT && window.EXTRA_AUDIT.markets) || [];
+  if (EXTRA.length) A.markets = LEDGER.concat(EXTRA);
+  var EXTRA_COUNT = A.markets.length - LEDGER_COUNT;
+
+  (function derive() {
+    var tc = { 1: 0, 2: 0, 3: 0 }, gc = { S: 0, A: 0, B: 0, C: 0 }, cats = {}, cc = {}, citySet = {}, provSet = {};
+    var c2p = A.CITY2PROV || {};
+    A.markets.forEach(function (m) {
+      tc[m.tier] = (tc[m.tier] || 0) + 1;
+      gc[m.grade] = (gc[m.grade] || 0) + 1;
+      m.cats.forEach(function (c) { cats[c] = (cats[c] || 0) + 1; });
+      (m.coverage || []).forEach(function (c) { cc[c] = 1; });
+      citySet[m.city] = 1;
+      var p = m.prov || c2p[m.city + "市"];
+      if (p) provSet[p] = 1;
+    });
+    A.tierCount = tc;
+    A.gradeCount = gc;
+    A.catCount = Object.keys(cats).map(function (k) { return [k, cats[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; });
+    A.coverageCityCount = Object.keys(cc).length;
+    A.cities = Object.keys(citySet).sort(function (a, b) { return a.localeCompare(b, "zh"); });
+    A.totalMarkets = A.markets.length;
+    A.ledgerCount = LEDGER_COUNT;
+    A.extraCount = EXTRA_COUNT;
+    A.pendingCount = A.markets.filter(function (m) { return String(m.status).indexOf("待") === 0; }).length;
+    A.totalPlan = A.markets.reduce(function (s, m) { return s + (m.plan || 0); }, 0);
+    A.provCount = Object.keys(provSet).length;
+  })();
+
+  var METRICS = {
+    markets: A.totalMarkets, cities: A.cities.length, coverage: A.coverageCityCount,
+    plan: A.totalPlan, tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
+    ledger: A.ledgerCount, extra: A.extraCount, pending: A.pendingCount, provs: A.provCount
+  };
+  $$("[data-metric]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-metric")];
+    if (v === undefined) return;
+    if (el.hasAttribute("data-count")) el.setAttribute("data-count", v);
+    else el.textContent = v.toLocaleString("en-US");
+  });
+  $$("[data-metric-text]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-metric-text")];
+    if (v !== undefined) el.textContent = v.toLocaleString("en-US");
+  });
+  $$("[data-pct]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-pct")];
+    if (v !== undefined) el.textContent = Math.round((v / A.totalMarkets) * 100);
+  });
+
   /* ─────────── 预加载 ─────────── */
   (function preload() {
     var el = $("#preloader"), num = $("#pre-count"), line = $(".pre-line i");
@@ -3301,6 +6704,11 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
       track.innerHTML = html;
     }
     build();
+    /* 保持匀速滚动：时长随内容宽度自适应（约 80px/s） */
+    requestAnimationFrame(function () {
+      var w = track.scrollWidth / 2;
+      track.style.animationDuration = Math.max(32, Math.round(w / 80)) + "s";
+    });
   })();
 
   /* ─────────── 总览图表 ─────────── */
@@ -3483,7 +6891,9 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
       '<div class="tt-name">' + m.name + "</div>" +
       '<div class="tt-meta"><i style="background:var(--t' + m.tier + ');box-shadow:0 0 6px var(--t' + m.tier + ')"></i>' +
       m.city + " · " + m.tierLabel + "</div>" +
-      '<div class="tt-foot"><span>辐射 ' + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span></div>";
+      '<div class="tt-foot">' + (m.coverage.length
+        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
+        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待复核" : "已核查") + "</span>") + "</div>";
     var rect = stage.getBoundingClientRect();
     var px = rect.left + (x / 1000) * rect.width;
     var py = rect.top + (y / 760) * rect.height;
@@ -3573,7 +6983,7 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
   });
 
   /* ─────────── 名录 ─────────── */
-  var dirState = { q: "", city: "", tier: 0, cat: "", sortPlan: true };
+  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortPlan: true };
   var grid = $("#dir-grid"), countEl = $("#dir-count");
   var sortBtn = $("#dir-sort");
 
@@ -3607,14 +7017,17 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
       if (dirState.tier && m.tier !== dirState.tier) return false;
       if (dirState.city && m.city !== dirState.city) return false;
       if (dirState.cat && m.cats.indexOf(dirState.cat) === -1) return false;
+      if (dirState.src === "ledger" && m.source === "research") return false;
+      if (dirState.src === "research" && m.source !== "research") return false;
+      if (dirState.src === "pending" && String(m.status).indexOf("待") !== 0) return false;
       if (q) {
-        var hay = (m.name + m.city + m.address + m.regName + m.tierLabel).toLowerCase();
+        var hay = (m.name + m.city + m.address + m.regName + m.tierLabel + (m.provShort || "") + m.cats.join("")).toLowerCase();
         if (hay.indexOf(q) === -1) return false;
       }
       return true;
     }).sort(function (a, b) {
       if (!dirState.sortPlan) return a.id - b.id;
-      return b.plan - a.plan || a.id - b.id;
+      return (b.plan || -1) - (a.plan || -1) || a.id - b.id;
     });
   }
 
@@ -3631,8 +7044,10 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
         '<p class="dc-scale">' + m.scale + "</p>" +
         '<div class="dc-cats">' + cats.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
         (more > 0 ? '<span class="more">+' + more + "</span>" : "") + "</div>" +
-        '<div class="dc-foot"><span>辐射 <b>' + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>" +
-        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="覆盖能力 ' + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
+        '<div class="dc-foot">' + (m.coverage.length
+          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
+          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待实地复核" : "已核查") + "</span>") +
+        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="' + (m.coverage.length ? "覆盖能力 " : "规模评估 ") + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
       "</article>"
     );
   }
@@ -3689,6 +7104,17 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
         renderGrid();
       });
     });
+    var srcWrap = $("#dir-source-filters");
+    if (srcWrap) {
+      $$("button", srcWrap).forEach(function (b) {
+        b.addEventListener("click", function () {
+          $$("button", srcWrap).forEach(function (x) { x.classList.remove("active"); });
+          b.classList.add("active");
+          dirState.src = b.getAttribute("data-src") || "";
+          renderGrid();
+        });
+      });
+    }
     sortBtn.addEventListener("click", function () {
       dirState.sortPlan = !dirState.sortPlan;
       sortBtn.querySelector("span").textContent = dirState.sortPlan ? "按门店容量" : "按编号";
@@ -3714,7 +7140,17 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
     var many = m.coverage.length > 14;
     var coverage = m.coverage.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
       (many ? '<button class="dw-cover-more" data-cover-more>展开全部 ' + m.coverage.length + " 城</button>" : "");
-    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan; }));
+    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan || 0; }));
+    var coverBlock = m.coverage.length
+      ? '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>"
+      : '<div class="dw-block"><h3>覆盖范围</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查，台账未登记覆盖城市列表；地图高亮其所在省份 <b>' + (m.prov || "") + "</b>。</p></div>";
+    var planBlock = (m.plan !== null && m.plan !== undefined)
+      ? '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
+        '<div class="dw-plan-num">' + m.plan + "</div>" +
+        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
+        "<p>占台账最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>"
+      : '<div class="dw-block"><h3>台账数据</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查对象，台账未登记「覆盖城市列表」与「规划开店容量」，故不参与容量等级推算；规模等级 <b>' + m.grade + "（" + GRADE_NAME[m.grade] + "）</b>由公开资料评估。</p></div>";
+    var provChip = m.prov ? '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' + m.prov + "</span>" : "";
     return (
       '<div class="dw-head">' +
         '<div class="dw-grade ' + GRADE_CLS[m.grade] + '"><b>' + m.grade + '</b><span>' + GRADE_NAME[m.grade] + "</span></div>" +
@@ -3723,20 +7159,18 @@ CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "�
         '<p class="dw-city">' + m.city + " · " + m.tierLabel + "</p></div>" +
       "</div>" +
       '<div class="dw-chips"><span class="dw-chip ' + TIER_CLS[m.tier] + '">' + m.tierLabel + "</span>" +
-      '<span class="dw-chip ' + statusCls + '">' + m.status + "</span>" +
-      '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">辐射 ' + m.coverage.length + " 城</span></div>" +
+      '<span class="dw-chip ' + statusCls + '">' + m.status + "</span>" + provChip +
+      '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' +
+      (m.coverage.length ? "辐射 " + m.coverage.length + " 城" : "补充核查") + "</span></div>" +
       '<div class="dw-block"><h3>供应能力画像</h3><p class="dw-scale">' + m.scale + "</p></div>" +
       '<div class="dw-block"><h3>规模与能力指标</h3><div class="dw-figures">' + figures + "</div></div>" +
       '<div class="dw-block"><h3>供应品类</h3><div class="dw-cats">' + cats + "</div></div>" +
-      '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>" +
-      '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
-        '<div class="dw-plan-num">' + m.plan + "</div>" +
-        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
-        "<p>占 30 市最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>" +
+      coverBlock + planBlock +
       '<div class="dw-block"><p class="dw-conclusion">' + m.conclusion + "</p>" +
       (m.nameNote ? '<p class="dw-note">※ ' + m.nameNote + "</p>" : "") + "</div>" +
       '<div class="dw-block"><h3>位置信息</h3><p class="dw-scale" style="font-size:13px">' + m.address +
-      "<br>经度 " + m.lng.toFixed(6) + " · 纬度 " + m.lat.toFixed(6) + "</p></div>" +
+      "<br>经度 " + m.lng.toFixed(6) + " · 纬度 " + m.lat.toFixed(6) +
+      (m.coordPrecision === "city" ? "（城市级坐标，估算）" : m.coordPrecision === "site" ? "（场址级坐标）" : "") + "</p></div>" +
       '<div class="dw-actions">' +
       '<a class="btn btn-primary magnetic" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=' + m.lng + "," + m.lat + "&name=" + encodeURIComponent(m.name) + '">高德地图导航</a>' +
       '<button class="dw-btn-ghost" data-map-jump>在地图查看</button>' +

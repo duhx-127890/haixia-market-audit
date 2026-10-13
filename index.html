@@ -77,10 +77,10 @@
       <a class="btn btn-ghost magnetic" href="#map" data-hover><span>查看全国分布</span></a>
     </div>
     <div class="hero-stats reveal-hero" style="--d:.55s">
-      <div class="hs"><b data-count="30">0</b><span>核查市场</span></div>
-      <div class="hs"><b data-count="26">0</b><span>市场城市</span></div>
-      <div class="hs"><b data-count="197">0</b><span>辐射城市</span></div>
-      <div class="hs"><b data-count="943">0</b><span>规划门店</span></div>
+      <div class="hs"><b data-count="30" data-metric="markets">0</b><span>核查市场</span></div>
+      <div class="hs"><b data-count="26" data-metric="cities">0</b><span>覆盖城市</span></div>
+      <div class="hs"><b data-count="25" data-metric="provs">0</b><span>覆盖省市</span></div>
+      <div class="hs"><b data-count="943" data-metric="plan">0</b><span>规划门店</span></div>
     </div>
   </div>
 
@@ -97,30 +97,35 @@
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>01 · GLOBAL OVERVIEW<i></i></p>
     <h2 class="sec-title">一潮之下，<em>三十港</em></h2>
-    <p class="sec-sub">从华南黄沙到东北之滨，核查覆盖 26 城 30 座批发市场，串联 197 个辐射城市的鲜活供应链。</p>
+    <p class="sec-sub">覆盖 <b data-metric-text="provs">25</b> 个省市、<b data-metric-text="cities">43</b> 座城市的水产批发市场，串联 <b data-metric-text="coverage">197</b> 个辐射城市的鲜活供应链。</p>
   </header>
 
   <div class="kpi-grid">
     <article class="kpi kpi-big reveal" style="--d:0s">
-      <span class="kpi-label">市场总数</span>
-      <div class="kpi-num"><b data-count="30">0</b><i>座</i></div>
-      <p>覆盖 26 个城市的一级至三级批发市场</p>
+      <span class="kpi-label">核查市场总数</span>
+      <div class="kpi-num"><b data-count="103" data-metric="markets">0</b><i>座</i></div>
+      <p>台账 <b data-metric-text="ledger">30</b> 座 + 公开资料补充 <b data-metric-text="extra">73</b> 座</p>
       <svg class="kpi-wave" viewBox="0 0 200 40" preserveAspectRatio="none"><path d="M0 20 Q 25 8 50 20 T 100 20 T 150 20 T 200 20" /></svg>
     </article>
     <article class="kpi reveal" style="--d:.08s">
       <span class="kpi-label">一级批发市场</span>
-      <div class="kpi-num sm"><b data-count="25">0</b><i>座</i></div>
+      <div class="kpi-num sm"><b data-count="25" data-metric="tier1">0</b><i>座</i></div>
       <p>承担区域集散的源头市场</p>
     </article>
     <article class="kpi reveal" style="--d:.16s">
-      <span class="kpi-label">规划开店容量</span>
-      <div class="kpi-num sm"><b data-count="943">0</b><i>家</i></div>
-      <p>台账口径 · 与汇总表核对一致</p>
+      <span class="kpi-label">待实地复核</span>
+      <div class="kpi-num sm"><b data-count="16" data-metric="pending">0</b><i>座</i></div>
+      <p>产地型与中小市场 · 建议走访确认</p>
     </article>
     <article class="kpi reveal" style="--d:.24s">
-      <span class="kpi-label">辐射城市总量</span>
-      <div class="kpi-num sm"><b data-count="197">0</b><i>城</i></div>
-      <p>去重后市场覆盖城市数</p>
+      <span class="kpi-label">台账规划开店容量</span>
+      <div class="kpi-num sm"><b data-count="943" data-metric="plan">0</b><i>家</i></div>
+      <p>与汇总表核对一致</p>
+    </article>
+    <article class="kpi reveal" style="--d:.32s">
+      <span class="kpi-label">台账辐射城市</span>
+      <div class="kpi-num sm"><b data-count="197" data-metric="coverage">0</b><i>城</i></div>
+      <p>去重后覆盖城市数</p>
     </article>
   </div>
 
@@ -158,7 +163,7 @@
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>02 · TIER SYSTEM<i></i></p>
     <h2 class="sec-title">三级<em>潮位</em></h2>
-    <p class="sec-sub">按集散半径与供应链角色，将 30 座市场划分为三个潮位层级。</p>
+    <p class="sec-sub">按集散半径与供应链角色，将核查市场划分为三个潮位层级；<b data-metric-text="pending">16</b> 座产地型与中小市场待实地复核。</p>
   </header>
   <div class="tier-grid">
     <article class="tier-card t1 reveal" style="--d:0s">
@@ -167,8 +172,8 @@
       <h3>一级批发市场</h3>
       <p class="tc-en">PRIMARY WHOLESALE</p>
       <p class="tc-desc">城市或区域的主导集散中心，货源直达产地与港口，辐射多城甚至跨省供应，是供应链的<b>主潮</b>。</p>
-      <div class="tc-stats"><b data-count="25">0</b><span>座 · 占 83%</span></div>
-      <div class="tc-tags"><span>广州黄沙</span><span>福州海峡</span><span>杭州新农都</span><span>郑州万邦</span></div>
+      <div class="tc-stats"><b data-count="25" data-metric="tier1">0</b><span>座 · 占 <i data-pct="tier1">83</i>%</span></div>
+      <div class="tc-tags"><span>广州黄沙</span><span>大连辽渔</span><span>常州凌家塘</span><span>湛江霞山</span></div>
     </article>
     <article class="tier-card t2 reveal" style="--d:.1s">
       <div class="tc-num">02</div>
@@ -176,8 +181,8 @@
       <h3>二级批发市场</h3>
       <p class="tc-en">SECONDARY / ORIGIN</p>
       <p class="tc-desc">产地收购码头与城市分销节点，承接一级货源向下分拨，或在一手渔港集货，是供应链的<b>支流</b>。</p>
-      <div class="tc-stats"><b data-count="4">0</b><span>座 · 占 13%</span></div>
-      <div class="tc-tags"><span>江门广海</span><span>汕头和平</span><span>成都青石桥</span></div>
+      <div class="tc-stats"><b data-count="4" data-metric="tier2">0</b><span>座 · 占 <i data-pct="tier2">13</i>%</span></div>
+      <div class="tc-tags"><span>珠海白藤头</span><span>三亚崖州渔港</span><span>柳州新柳邕</span></div>
     </article>
     <article class="tier-card t3 reveal" style="--d:.2s">
       <div class="tc-num">03</div>
@@ -185,8 +190,8 @@
       <h3>三级市场</h3>
       <p class="tc-en">RETAIL TERMINAL</p>
       <p class="tc-desc">面向城区终端的零售型市场，直接服务社区居民与餐饮门店，是供应链的<b>细流</b>。</p>
-      <div class="tc-stats"><b data-count="1">0</b><span>座 · 占 3%</span></div>
-      <div class="tc-tags"><span>青岛埠西</span></div>
+      <div class="tc-stats"><b data-count="1" data-metric="tier3">0</b><span>座 · 占 <i data-pct="tier3">3</i>%</span></div>
+      <div class="tc-tags"><span>青岛埠西</span><span>三亚第一市场</span><span>海口东门市场</span></div>
     </article>
   </div>
 </section>
@@ -196,15 +201,15 @@
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>03 · NATIONAL GRID<i></i></p>
     <h2 class="sec-title">潮汐<em>版图</em></h2>
-    <p class="sec-sub">悬停光点查看市场与其辐射省份；点击进入完整核查档案。</p>
+    <p class="sec-sub">悬停光点查看市场与其辐射省份；点击进入完整核查档案。台账市场高亮其覆盖省份，补充核查市场高亮所在省份。</p>
   </header>
 
   <div class="map-toolbar reveal">
     <div class="map-filters" id="map-filters" role="tablist" aria-label="按级别筛选">
-      <button class="mf active" data-tier="0">全部 <em>30</em></button>
-      <button class="mf" data-tier="1"><i class="dot d1"></i>一级 <em>25</em></button>
-      <button class="mf" data-tier="2"><i class="dot d2"></i>二级 <em>4</em></button>
-      <button class="mf" data-tier="3"><i class="dot d3"></i>三级 <em>1</em></button>
+      <button class="mf active" data-tier="0">全部 <em data-metric="markets">103</em></button>
+      <button class="mf" data-tier="1"><i class="dot d1"></i>一级 <em data-metric="tier1">70</em></button>
+      <button class="mf" data-tier="2"><i class="dot d2"></i>二级 <em data-metric="tier2">30</em></button>
+      <button class="mf" data-tier="3"><i class="dot d3"></i>三级 <em data-metric="tier3">3</em></button>
     </div>
     <div class="map-legend">
       <span><i class="pulse p1"></i>一级 · 主潮</span>
@@ -226,7 +231,7 @@
   <header class="sec-head reveal">
     <p class="sec-kicker"><i></i>04 · MARKET DIRECTORY<i></i></p>
     <h2 class="sec-title">三十港<em>名录</em></h2>
-    <p class="sec-sub">搜索、按城市 / 级别 / 品类筛选，点击任一市场展开完整核查档案。</p>
+    <p class="sec-sub">搜索、按城市 / 级别 / 品类 / 数据来源筛选，点击任一市场展开完整核查档案。</p>
   </header>
 
   <div class="dir-controls reveal">
@@ -246,9 +251,15 @@
   </div>
   <div class="dir-tiers reveal" id="dir-tier-filters">
     <button class="active" data-tier="0">全部级别</button>
-    <button data-tier="1">一级 <em>25</em></button>
-    <button data-tier="2">二级 <em>4</em></button>
-    <button data-tier="3">三级 <em>1</em></button>
+    <button data-tier="1">一级 <em data-metric="tier1">70</em></button>
+    <button data-tier="2">二级 <em data-metric="tier2">30</em></button>
+    <button data-tier="3">三级 <em data-metric="tier3">3</em></button>
+  </div>
+  <div class="dir-tiers src reveal" id="dir-source-filters">
+    <button class="active" data-src="">全部来源 <em data-metric="markets">103</em></button>
+    <button data-src="ledger">台账市场 <em data-metric="ledger">30</em></button>
+    <button data-src="research">补充核查 <em data-metric="extra">73</em></button>
+    <button data-src="pending">待实地复核 <em data-metric="pending">16</em></button>
   </div>
   <div class="dir-cats reveal" id="dir-cat-filters" aria-label="按品类筛选"></div>
 
@@ -273,7 +284,7 @@
     <article class="method-card reveal" style="--d:.1s">
       <span class="m-ico">◉</span>
       <h3>公开资料核查层</h3>
-      <p>市场级别、供应品类与规模数据来自政府公开信息、行业协会与权威媒体报道，逐条标注出处。</p>
+      <p>覆盖 25 个省市的主要批发市场：级别、供应品类与规模数据来自政府公开信息、行业协会与权威媒体报道，逐条标注出处与置信度（高 / 中 / 低）。</p>
       <em>置信度 · 中—高</em>
     </article>
     <article class="method-card reveal" style="--d:.2s">
@@ -296,6 +307,15 @@
       <li><a href="https://nyncw.sh.gov.cn/mtbd/20180705/0009-23849.html" target="_blank" rel="noopener">上海市农委 · 上海水产市场布局</a></li>
       <li><a href="https://www.sina.cn/news/article/comos_nisinhk7818754.html" target="_blank" rel="noopener">公开资料 · 石家庄四大海鲜市场对比</a></li>
       <li><a href="http://static.nfapp.southcn.com/content/201706/11/c475559.html" target="_blank" rel="noopener">南方+ · 广东知名水产批发市场盘点</a></li>
+      <li><a href="https://www.maigoo.com/top/437723.html" target="_blank" rel="noopener">买购网 · 天津十大海鲜批发市场（2026）</a></li>
+      <li><a href="https://www.maigoo.com/top/3DMNOTQ1.html" target="_blank" rel="noopener">买购网 · 安徽十大海鲜批发市场</a></li>
+      <li><a href="https://www.maigoo.com/top/4DMNNzU1.html" target="_blank" rel="noopener">买购网 · 湖南十大水产批发市场</a></li>
+      <li><a href="https://www.lfg.com.cn/Product/Content.aspx?ProductId=314" target="_blank" rel="noopener">辽渔集团 · 大连辽渔国际水产品市场</a></li>
+      <li><a href="https://m.gmw.cn/2025-02/28/content_37876144.htm" target="_blank" rel="noopener">光明网 · 舟山国际水产城</a></li>
+      <li><a href="https://moment.rednet.cn/content/646856/68/14572721.html" target="_blank" rel="noopener">红网 · 长沙 4 家市场入榜全国农产品批发市场行业榜</a></li>
+      <li><a href="https://www.my399.com/2026/05-11/q19yj4x1.html" target="_blank" rel="noopener">哈尔滨新闻网 · 先锋农批市场二期海鲜冻品交易区</a></li>
+      <li><a href="https://www.moa.gov.cn/xw/qg/201409/t20140930_4070471.htm" target="_blank" rel="noopener">农业农村部 · 大连冰鲜贝类交易大厅开张</a></li>
+      <li><a href="https://www.sina.cn/gc/article/nitqkpm2267388.html" target="_blank" rel="noopener">公开资料 · 大连三大海鲜市场实测对比</a></li>
     </ul>
   </div>
 </section>
@@ -323,6 +343,7 @@
 
 <script src="assets/js/china-geo.js"></script>
 <script src="assets/js/data.js"></script>
+<script src="assets/js/data-extra.js"></script>
 <script src="assets/js/ocean.js"></script>
 <script src="assets/js/app.js"></script>
 </body>

@@ -13,6 +13,59 @@
   var GRADE_CLS = { S: "gS", A: "gA", B: "gB", C: "gC" };
   var GRADE_NAME = { S: "战略级", A: "强覆盖", B: "标准型", C: "补充型" };
 
+  /* ─────────── 数据合并：台账市场 + 公开资料补充核查 ─────────── */
+  var LEDGER = A.markets.slice();
+  var LEDGER_COUNT = LEDGER.length;
+  var EXTRA = (window.EXTRA_AUDIT && window.EXTRA_AUDIT.markets) || [];
+  if (EXTRA.length) A.markets = LEDGER.concat(EXTRA);
+  var EXTRA_COUNT = A.markets.length - LEDGER_COUNT;
+
+  (function derive() {
+    var tc = { 1: 0, 2: 0, 3: 0 }, gc = { S: 0, A: 0, B: 0, C: 0 }, cats = {}, cc = {}, citySet = {}, provSet = {};
+    var c2p = A.CITY2PROV || {};
+    A.markets.forEach(function (m) {
+      tc[m.tier] = (tc[m.tier] || 0) + 1;
+      gc[m.grade] = (gc[m.grade] || 0) + 1;
+      m.cats.forEach(function (c) { cats[c] = (cats[c] || 0) + 1; });
+      (m.coverage || []).forEach(function (c) { cc[c] = 1; });
+      citySet[m.city] = 1;
+      var p = m.prov || c2p[m.city + "市"];
+      if (p) provSet[p] = 1;
+    });
+    A.tierCount = tc;
+    A.gradeCount = gc;
+    A.catCount = Object.keys(cats).map(function (k) { return [k, cats[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; });
+    A.coverageCityCount = Object.keys(cc).length;
+    A.cities = Object.keys(citySet).sort(function (a, b) { return a.localeCompare(b, "zh"); });
+    A.totalMarkets = A.markets.length;
+    A.ledgerCount = LEDGER_COUNT;
+    A.extraCount = EXTRA_COUNT;
+    A.pendingCount = A.markets.filter(function (m) { return String(m.status).indexOf("待") === 0; }).length;
+    A.totalPlan = A.markets.reduce(function (s, m) { return s + (m.plan || 0); }, 0);
+    A.provCount = Object.keys(provSet).length;
+  })();
+
+  var METRICS = {
+    markets: A.totalMarkets, cities: A.cities.length, coverage: A.coverageCityCount,
+    plan: A.totalPlan, tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
+    ledger: A.ledgerCount, extra: A.extraCount, pending: A.pendingCount, provs: A.provCount
+  };
+  $$("[data-metric]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-metric")];
+    if (v === undefined) return;
+    if (el.hasAttribute("data-count")) el.setAttribute("data-count", v);
+    else el.textContent = v.toLocaleString("en-US");
+  });
+  $$("[data-metric-text]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-metric-text")];
+    if (v !== undefined) el.textContent = v.toLocaleString("en-US");
+  });
+  $$("[data-pct]").forEach(function (el) {
+    var v = METRICS[el.getAttribute("data-pct")];
+    if (v !== undefined) el.textContent = Math.round((v / A.totalMarkets) * 100);
+  });
+
   /* ─────────── 预加载 ─────────── */
   (function preload() {
     var el = $("#preloader"), num = $("#pre-count"), line = $(".pre-line i");
@@ -168,6 +221,11 @@
       track.innerHTML = html;
     }
     build();
+    /* 保持匀速滚动：时长随内容宽度自适应（约 80px/s） */
+    requestAnimationFrame(function () {
+      var w = track.scrollWidth / 2;
+      track.style.animationDuration = Math.max(32, Math.round(w / 80)) + "s";
+    });
   })();
 
   /* ─────────── 总览图表 ─────────── */
@@ -350,7 +408,9 @@
       '<div class="tt-name">' + m.name + "</div>" +
       '<div class="tt-meta"><i style="background:var(--t' + m.tier + ');box-shadow:0 0 6px var(--t' + m.tier + ')"></i>' +
       m.city + " · " + m.tierLabel + "</div>" +
-      '<div class="tt-foot"><span>辐射 ' + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span></div>";
+      '<div class="tt-foot">' + (m.coverage.length
+        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
+        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待复核" : "已核查") + "</span>") + "</div>";
     var rect = stage.getBoundingClientRect();
     var px = rect.left + (x / 1000) * rect.width;
     var py = rect.top + (y / 760) * rect.height;
@@ -440,7 +500,7 @@
   });
 
   /* ─────────── 名录 ─────────── */
-  var dirState = { q: "", city: "", tier: 0, cat: "", sortPlan: true };
+  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortPlan: true };
   var grid = $("#dir-grid"), countEl = $("#dir-count");
   var sortBtn = $("#dir-sort");
 
@@ -474,14 +534,17 @@
       if (dirState.tier && m.tier !== dirState.tier) return false;
       if (dirState.city && m.city !== dirState.city) return false;
       if (dirState.cat && m.cats.indexOf(dirState.cat) === -1) return false;
+      if (dirState.src === "ledger" && m.source === "research") return false;
+      if (dirState.src === "research" && m.source !== "research") return false;
+      if (dirState.src === "pending" && String(m.status).indexOf("待") !== 0) return false;
       if (q) {
-        var hay = (m.name + m.city + m.address + m.regName + m.tierLabel).toLowerCase();
+        var hay = (m.name + m.city + m.address + m.regName + m.tierLabel + (m.provShort || "") + m.cats.join("")).toLowerCase();
         if (hay.indexOf(q) === -1) return false;
       }
       return true;
     }).sort(function (a, b) {
       if (!dirState.sortPlan) return a.id - b.id;
-      return b.plan - a.plan || a.id - b.id;
+      return (b.plan || -1) - (a.plan || -1) || a.id - b.id;
     });
   }
 
@@ -498,8 +561,10 @@
         '<p class="dc-scale">' + m.scale + "</p>" +
         '<div class="dc-cats">' + cats.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
         (more > 0 ? '<span class="more">+' + more + "</span>" : "") + "</div>" +
-        '<div class="dc-foot"><span>辐射 <b>' + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>" +
-        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="覆盖能力 ' + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
+        '<div class="dc-foot">' + (m.coverage.length
+          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
+          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待实地复核" : "已核查") + "</span>") +
+        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="' + (m.coverage.length ? "覆盖能力 " : "规模评估 ") + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
       "</article>"
     );
   }
@@ -556,6 +621,17 @@
         renderGrid();
       });
     });
+    var srcWrap = $("#dir-source-filters");
+    if (srcWrap) {
+      $$("button", srcWrap).forEach(function (b) {
+        b.addEventListener("click", function () {
+          $$("button", srcWrap).forEach(function (x) { x.classList.remove("active"); });
+          b.classList.add("active");
+          dirState.src = b.getAttribute("data-src") || "";
+          renderGrid();
+        });
+      });
+    }
     sortBtn.addEventListener("click", function () {
       dirState.sortPlan = !dirState.sortPlan;
       sortBtn.querySelector("span").textContent = dirState.sortPlan ? "按门店容量" : "按编号";
@@ -581,7 +657,17 @@
     var many = m.coverage.length > 14;
     var coverage = m.coverage.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
       (many ? '<button class="dw-cover-more" data-cover-more>展开全部 ' + m.coverage.length + " 城</button>" : "");
-    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan; }));
+    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan || 0; }));
+    var coverBlock = m.coverage.length
+      ? '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>"
+      : '<div class="dw-block"><h3>覆盖范围</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查，台账未登记覆盖城市列表；地图高亮其所在省份 <b>' + (m.prov || "") + "</b>。</p></div>";
+    var planBlock = (m.plan !== null && m.plan !== undefined)
+      ? '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
+        '<div class="dw-plan-num">' + m.plan + "</div>" +
+        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
+        "<p>占台账最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>"
+      : '<div class="dw-block"><h3>台账数据</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查对象，台账未登记「覆盖城市列表」与「规划开店容量」，故不参与容量等级推算；规模等级 <b>' + m.grade + "（" + GRADE_NAME[m.grade] + "）</b>由公开资料评估。</p></div>";
+    var provChip = m.prov ? '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' + m.prov + "</span>" : "";
     return (
       '<div class="dw-head">' +
         '<div class="dw-grade ' + GRADE_CLS[m.grade] + '"><b>' + m.grade + '</b><span>' + GRADE_NAME[m.grade] + "</span></div>" +
@@ -590,20 +676,18 @@
         '<p class="dw-city">' + m.city + " · " + m.tierLabel + "</p></div>" +
       "</div>" +
       '<div class="dw-chips"><span class="dw-chip ' + TIER_CLS[m.tier] + '">' + m.tierLabel + "</span>" +
-      '<span class="dw-chip ' + statusCls + '">' + m.status + "</span>" +
-      '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">辐射 ' + m.coverage.length + " 城</span></div>" +
+      '<span class="dw-chip ' + statusCls + '">' + m.status + "</span>" + provChip +
+      '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' +
+      (m.coverage.length ? "辐射 " + m.coverage.length + " 城" : "补充核查") + "</span></div>" +
       '<div class="dw-block"><h3>供应能力画像</h3><p class="dw-scale">' + m.scale + "</p></div>" +
       '<div class="dw-block"><h3>规模与能力指标</h3><div class="dw-figures">' + figures + "</div></div>" +
       '<div class="dw-block"><h3>供应品类</h3><div class="dw-cats">' + cats + "</div></div>" +
-      '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>" +
-      '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
-        '<div class="dw-plan-num">' + m.plan + "</div>" +
-        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
-        "<p>占 30 市最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>" +
+      coverBlock + planBlock +
       '<div class="dw-block"><p class="dw-conclusion">' + m.conclusion + "</p>" +
       (m.nameNote ? '<p class="dw-note">※ ' + m.nameNote + "</p>" : "") + "</div>" +
       '<div class="dw-block"><h3>位置信息</h3><p class="dw-scale" style="font-size:13px">' + m.address +
-      "<br>经度 " + m.lng.toFixed(6) + " · 纬度 " + m.lat.toFixed(6) + "</p></div>" +
+      "<br>经度 " + m.lng.toFixed(6) + " · 纬度 " + m.lat.toFixed(6) +
+      (m.coordPrecision === "city" ? "（城市级坐标，估算）" : m.coordPrecision === "site" ? "（场址级坐标）" : "") + "</p></div>" +
       '<div class="dw-actions">' +
       '<a class="btn btn-primary magnetic" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=' + m.lng + "," + m.lat + "&name=" + encodeURIComponent(m.name) + '">高德地图导航</a>' +
       '<button class="dw-btn-ghost" data-map-jump>在地图查看</button>' +
