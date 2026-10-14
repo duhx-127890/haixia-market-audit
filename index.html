@@ -47,7 +47,7 @@
     <a href="#method" data-hover>核查方法</a>
   </nav>
   <div class="nav-right">
-    <span class="nav-badge"><i></i>台账 943 店</span>
+    <span class="nav-badge"><i></i>核查 <b data-metric-text="markets">103</b> 座市场</span>
     <button class="nav-ver" data-hover>v2026.10</button>
   </div>
 </header>
@@ -80,7 +80,7 @@
       <div class="hs"><b data-count="30" data-metric="markets">0</b><span>核查市场</span></div>
       <div class="hs"><b data-count="26" data-metric="cities">0</b><span>覆盖城市</span></div>
       <div class="hs"><b data-count="25" data-metric="provs">0</b><span>覆盖省市</span></div>
-      <div class="hs"><b data-count="943" data-metric="plan">0</b><span>规划门店</span></div>
+      <div class="hs"><b data-count="70" data-metric="tier1">0</b><span>一级市场</span></div>
     </div>
   </div>
 
@@ -115,14 +115,9 @@
     <article class="kpi reveal" style="--d:.16s">
       <span class="kpi-label">待实地复核</span>
       <div class="kpi-num sm"><b data-count="16" data-metric="pending">0</b><i>座</i></div>
-      <p>产地型与中小市场 · 建议走访确认</p>
+      <p>产地型与中小市场 · 规模数据以公开资料为准</p>
     </article>
     <article class="kpi reveal" style="--d:.24s">
-      <span class="kpi-label">台账规划开店容量</span>
-      <div class="kpi-num sm"><b data-count="943" data-metric="plan">0</b><i>家</i></div>
-      <p>与汇总表核对一致</p>
-    </article>
-    <article class="kpi reveal" style="--d:.32s">
       <span class="kpi-label">台账辐射城市</span>
       <div class="kpi-num sm"><b data-count="197" data-metric="coverage">0</b><i>城</i></div>
       <p>去重后覆盖城市数</p>
@@ -145,9 +140,9 @@
     </article>
 
     <article class="panel chart-panel reveal">
-      <header class="panel-head"><h3>覆盖能力等级</h3><span class="panel-tag">CAPACITY GRADE</span></header>
+      <header class="panel-head"><h3>市场规模等级</h3><span class="panel-tag">SCALE GRADE</span></header>
       <div class="bars" id="grade-bars"></div>
-      <p class="chart-note">按台账「规划开店容量」推算 · S≥60 · A≥40 · B≥20 · C&lt;20</p>
+      <p class="chart-note">综合辐射城市数与集散规模评估 · S 最高 · C 最低</p>
     </article>
 
     <article class="panel chart-panel reveal">
@@ -246,7 +241,7 @@
       <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <button class="dir-sort" id="dir-sort" data-hover aria-label="切换排序">
-      <svg viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/></svg><span>按门店容量</span>
+      <svg viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/></svg><span>按覆盖城市</span>
     </button>
   </div>
   <div class="dir-tiers reveal" id="dir-tier-filters">
@@ -278,7 +273,7 @@
     <article class="method-card reveal" style="--d:0s">
       <span class="m-ico">◈</span>
       <h3>台账基础层</h3>
-      <p>市场名称、坐标、覆盖城市与规划开店容量取自《水产批发市场明细》台账，并与汇总表交叉核对（合计 943 店一致）。</p>
+      <p>市场名称、坐标与覆盖城市列表取自《水产批发市场明细》台账，台账数据与页面统计交叉核对一致。</p>
       <em>置信度 · 高</em>
     </article>
     <article class="method-card reveal" style="--d:.1s">
@@ -290,7 +285,7 @@
     <article class="method-card reveal" style="--d:.2s">
       <span class="m-ico">◌</span>
       <h3>实地复核层</h3>
-      <p>产地型与部分分销市场建议安排实地走访，确认交易时间、商户结构与档口租金后再锁定级别。</p>
+      <p>产地型与部分分销市场的规模数据公开资料暂缺，已标注为待核实状态，其级别与品类依据市场类型与区位判断。</p>
       <em>置信度 · 待核实</em>
     </article>
   </div>

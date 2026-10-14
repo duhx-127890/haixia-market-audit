@@ -240,7 +240,7 @@ body.ready .reveal-hero{opacity:1;transform:none}
 .reveal.in{opacity:1;transform:none}
 
 /* ---------- 总览 KPI ---------- */
-.kpi-grid{display:grid;grid-template-columns:1.45fr 1fr 1fr 1fr 1fr;gap:18px;margin-bottom:20px}
+.kpi-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:20px;margin-bottom:20px}
 .kpi{position:relative;border:1px solid var(--line);border-radius:var(--r);padding:30px 30px 26px;overflow:hidden;
   background:linear-gradient(160deg,rgba(12,28,50,.6),rgba(7,16,32,.55));transition:border-color .4s,transform .4s var(--ease),box-shadow .4s}
 .kpi:hover{border-color:rgba(103,232,249,.35);transform:translateY(-4px);box-shadow:0 22px 60px -20px rgba(6,30,52,.9)}
@@ -657,7 +657,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     <a href="#method" data-hover>核查方法</a>
   </nav>
   <div class="nav-right">
-    <span class="nav-badge"><i></i>台账 943 店</span>
+    <span class="nav-badge"><i></i>核查 <b data-metric-text="markets">103</b> 座市场</span>
     <button class="nav-ver" data-hover>v2026.10</button>
   </div>
 </header>
@@ -690,7 +690,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <div class="hs"><b data-count="30" data-metric="markets">0</b><span>核查市场</span></div>
       <div class="hs"><b data-count="26" data-metric="cities">0</b><span>覆盖城市</span></div>
       <div class="hs"><b data-count="25" data-metric="provs">0</b><span>覆盖省市</span></div>
-      <div class="hs"><b data-count="943" data-metric="plan">0</b><span>规划门店</span></div>
+      <div class="hs"><b data-count="70" data-metric="tier1">0</b><span>一级市场</span></div>
     </div>
   </div>
 
@@ -725,14 +725,9 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     <article class="kpi reveal" style="--d:.16s">
       <span class="kpi-label">待实地复核</span>
       <div class="kpi-num sm"><b data-count="16" data-metric="pending">0</b><i>座</i></div>
-      <p>产地型与中小市场 · 建议走访确认</p>
+      <p>产地型与中小市场 · 规模数据以公开资料为准</p>
     </article>
     <article class="kpi reveal" style="--d:.24s">
-      <span class="kpi-label">台账规划开店容量</span>
-      <div class="kpi-num sm"><b data-count="943" data-metric="plan">0</b><i>家</i></div>
-      <p>与汇总表核对一致</p>
-    </article>
-    <article class="kpi reveal" style="--d:.32s">
       <span class="kpi-label">台账辐射城市</span>
       <div class="kpi-num sm"><b data-count="197" data-metric="coverage">0</b><i>城</i></div>
       <p>去重后覆盖城市数</p>
@@ -755,9 +750,9 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     </article>
 
     <article class="panel chart-panel reveal">
-      <header class="panel-head"><h3>覆盖能力等级</h3><span class="panel-tag">CAPACITY GRADE</span></header>
+      <header class="panel-head"><h3>市场规模等级</h3><span class="panel-tag">SCALE GRADE</span></header>
       <div class="bars" id="grade-bars"></div>
-      <p class="chart-note">按台账「规划开店容量」推算 · S≥60 · A≥40 · B≥20 · C&lt;20</p>
+      <p class="chart-note">综合辐射城市数与集散规模评估 · S 最高 · C 最低</p>
     </article>
 
     <article class="panel chart-panel reveal">
@@ -856,7 +851,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
       <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
     </div>
     <button class="dir-sort" id="dir-sort" data-hover aria-label="切换排序">
-      <svg viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/></svg><span>按门店容量</span>
+      <svg viewBox="0 0 24 24"><path d="M4 6h13M4 12h9M4 18h5"/></svg><span>按覆盖城市</span>
     </button>
   </div>
   <div class="dir-tiers reveal" id="dir-tier-filters">
@@ -888,7 +883,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     <article class="method-card reveal" style="--d:0s">
       <span class="m-ico">◈</span>
       <h3>台账基础层</h3>
-      <p>市场名称、坐标、覆盖城市与规划开店容量取自《水产批发市场明细》台账，并与汇总表交叉核对（合计 943 店一致）。</p>
+      <p>市场名称、坐标与覆盖城市列表取自《水产批发市场明细》台账，台账数据与页面统计交叉核对一致。</p>
       <em>置信度 · 高</em>
     </article>
     <article class="method-card reveal" style="--d:.1s">
@@ -900,7 +895,7 @@ body.no-webgl #ocean{background:linear-gradient(180deg,#02060f 0%,#041426 40%,#0
     <article class="method-card reveal" style="--d:.2s">
       <span class="m-ico">◌</span>
       <h3>实地复核层</h3>
-      <p>产地型与部分分销市场建议安排实地走访，确认交易时间、商户结构与档口租金后再锁定级别。</p>
+      <p>产地型与部分分销市场的规模数据公开资料暂缺，已标注为待核实状态，其级别与品类依据市场类型与区位判断。</p>
       <em>置信度 · 待核实</em>
     </article>
   </div>
@@ -958,7 +953,7 @@ window.CHINA_GEO = {"type":"FeatureCollection","features":[{"type":"Feature","pr
 </script>
 <script>
 /* 自动生成：build_data.py · 数据来源《水产批发市场明细.xlsx》+ 公开资料核查（含置信度标注） */
-window.AUDIT = {generated: '2026-10', sourceFile: '水产批发市场明细.xlsx', totalPlan: 943, tierCount: {"1": 25, "2": 4, "3": 1}, gradeCount: {"S": 5, "A": 6, "B": 3, "C": 16}, catCount: [["活鲜", 30], ["干货", 27], ["贝类", 26], ["冻品", 26], ["冰鲜", 21], ["河鲜", 13], ["进口海鲜", 6], ["海捕", 6], ["加工品/预制菜", 1], ["加工品", 1]],
+window.AUDIT = {generated: '2026-10', sourceFile: '水产批发市场明细.xlsx', tierCount: {"1": 25, "2": 4, "3": 1}, gradeCount: {"S": 5, "A": 6, "B": 3, "C": 16}, catCount: [["活鲜", 30], ["干货", 27], ["贝类", 26], ["冻品", 26], ["冰鲜", 21], ["河鲜", 13], ["进口海鲜", 6], ["海捕", 6], ["加工品/预制菜", 1], ["加工品", 1]],
 cities: ["上海", "东莞", "北京", "南京", "南宁", "南通", "厦门", "合肥", "天津", "广州", "成都", "无锡", "昆明", "杭州", "武汉", "汕头", "江门", "深圳", "石家庄", "福州", "苏州", "西安", "贵阳", "郑州", "重庆", "青岛"],
 coverageCityCount: 197,
 markets: [
@@ -992,7 +987,6 @@ markets: [
   "provinces": [
    "广东省"
   ],
-  "plan": 53,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "深圳规模最大的水产综合批发市场，华南重要集散节点",
@@ -1014,13 +1008,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "53",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "深圳最大水产批发市场",
     "source": "公开资料",
@@ -1028,7 +1015,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "深圳·深圳罗湖水产（罗芳）综合批发市场为一级批发市场，主营活鲜、冰鲜、贝类、冻品；台账辐射 16 城、规划开店 53 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "深圳·深圳罗湖水产（罗芳）综合批发市场为一级批发市场，主营活鲜、冰鲜、贝类、冻品；台账辐射 16 座城市，规模等级 A。"
  },
  {
   "id": 2,
@@ -1059,7 +1047,6 @@ markets: [
   "provinces": [
    "广东省"
   ],
-  "plan": 53,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "珠三角大型水产批发市场，虎门港物流腹地",
@@ -1080,13 +1067,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "53",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "东莞最大水产批发市场",
     "source": "公开资料",
@@ -1094,7 +1074,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "东莞·东莞新富民水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 15 城、规划开店 53 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "东莞·东莞新富民水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 15 座城市，规模等级 A。"
  },
  {
   "id": 3,
@@ -1121,7 +1102,6 @@ markets: [
    "浙江省",
    "福建省"
   ],
-  "plan": 17,
   "tier": 1,
   "tierLabel": "一级批发市场（国家级）",
   "scale": "全国规模最大的水产品交易中心（马尾），海陆集散枢纽",
@@ -1145,13 +1125,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "17",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "年交易量",
     "value": "约200万吨",
     "source": "公开报道",
@@ -1159,7 +1132,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "福州·福州市马尾区海峡水产品交易中心为一级批发市场（国家级），主营活鲜、冰鲜、贝类、冻品；台账辐射 10 城、规划开店 17 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "福州·福州市马尾区海峡水产品交易中心为一级批发市场（国家级），主营活鲜、冰鲜、贝类、冻品；台账辐射 10 座城市，规模等级 C。"
  },
  {
   "id": 4,
@@ -1186,7 +1160,6 @@ markets: [
    "广东省",
    "福建省"
   ],
-  "plan": 17,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "厦门唯一规模化国际水产交易平台，闽南集散中心",
@@ -1208,13 +1181,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "17",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "年交易额",
     "value": "超百亿元",
     "source": "公开报道",
@@ -1222,7 +1188,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "厦门·厦门夏商国际水产交易中心为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 10 城、规划开店 17 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "厦门·厦门夏商国际水产交易中心为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 10 座城市，规模等级 C。"
  },
  {
   "id": 5,
@@ -1258,7 +1225,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 77,
   "tier": 1,
   "tierLabel": "一级批发市场（省级）",
   "scale": "浙江省鲜活水产品批发源头市场，年成交额70余亿元",
@@ -1280,13 +1246,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "77",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "年成交额",
     "value": "70余亿元",
     "source": "官方行业协会",
@@ -1294,7 +1253,8 @@ markets: [
    }
   ],
   "grade": "S",
-  "conclusion": "杭州·杭州萧山新农都水产市场为一级批发市场（省级），主营活鲜、冰鲜、贝类、冻品；台账辐射 17 城、规划开店 77 家，覆盖能力等级 S。"
+  "source": "ledger",
+  "conclusion": "杭州·杭州萧山新农都水产市场为一级批发市场（省级），主营活鲜、冰鲜、贝类、冻品；台账辐射 17 座城市，规模等级 S。"
  },
  {
   "id": 6,
@@ -1328,7 +1288,6 @@ markets: [
    "甘肃省",
    "陕西省"
   ],
-  "plan": 16,
   "tier": 1,
   "tierLabel": "一级批发市场（区域）",
   "scale": "西北地区规模最大的海鲜批发市场",
@@ -1349,13 +1308,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "16",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "西北最大海鲜批发市场",
     "source": "公开资料",
@@ -1363,7 +1315,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "西安·西部欣桥海鲜市场为一级批发市场（区域），主营活鲜、冻品、干货、贝类；台账辐射 14 城、规划开店 16 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "西安·西部欣桥海鲜市场为一级批发市场（区域），主营活鲜、冻品、干货、贝类；台账辐射 14 座城市，规模等级 C。"
  },
  {
   "id": 7,
@@ -1400,7 +1353,6 @@ markets: [
    "湖北省",
    "湖南省"
   ],
-  "plan": 17,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "武汉规模最大的水产批发市场（汉口北）",
@@ -1422,13 +1374,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "17",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "武汉最大水产批发市场",
     "source": "公开资料",
@@ -1436,7 +1381,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "武汉·武汉新华南水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 城、规划开店 17 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "武汉·武汉新华南水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 座城市，规模等级 C。"
  },
  {
   "id": 8,
@@ -1458,7 +1404,6 @@ markets: [
   "provinces": [
    "山东省"
   ],
-  "plan": 11,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "青岛最大的活海鲜批发交易市场",
@@ -1479,13 +1424,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "11",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "青岛最大活海鲜批发市场",
     "source": "公开资料",
@@ -1493,7 +1431,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "青岛·城阳活海鲜水产品批发交易市场为一级批发市场，主营活鲜、贝类、冰鲜、海捕；台账辐射 6 城、规划开店 11 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "青岛·城阳活海鲜水产品批发交易市场为一级批发市场，主营活鲜、贝类、冰鲜、海捕；台账辐射 6 座城市，规模等级 C。"
  },
  {
   "id": 9,
@@ -1532,7 +1471,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 45,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "南京最大农产品物流中心，华东重要农批枢纽",
@@ -1554,13 +1492,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "45",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "南京最大农产品批发市场",
     "source": "公开资料",
@@ -1568,7 +1499,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "南京·南京众彩水产市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；台账辐射 21 城、规划开店 45 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "南京·南京众彩水产市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；台账辐射 21 座城市，规模等级 A。"
  },
  {
   "id": 10,
@@ -1592,7 +1524,6 @@ markets: [
    "山东省",
    "江苏省"
   ],
-  "plan": 12,
   "tier": 3,
   "tierLabel": "三级市场（城区终端）",
   "scale": "城区终端零售型海鲜市场，服务周边社区居民",
@@ -1612,13 +1543,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "12",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "青岛埠西片区零售海鲜市场",
     "source": "公开资料",
@@ -1626,7 +1550,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "青岛·埠西海鲜批发市场为三级市场（城区终端），主营活鲜、贝类、海捕、冰鲜；台账辐射 7 城、规划开店 12 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "青岛·埠西海鲜批发市场为三级市场（城区终端），主营活鲜、贝类、海捕、冰鲜；台账辐射 7 座城市，规模等级 C。"
  },
  {
   "id": 11,
@@ -1653,7 +1578,6 @@ markets: [
   "provinces": [
    "广西壮族自治区"
   ],
-  "plan": 7,
   "tier": 1,
   "tierLabel": "一级批发市场（城市）",
   "scale": "南宁主城区规模最大的海鲜批发市场",
@@ -1674,13 +1598,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "7",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "南宁主要海鲜批发市场",
     "source": "公开资料",
@@ -1688,7 +1605,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "南宁·南宁海鲜批发交易市场为一级批发市场（城市），主营活鲜、冰鲜、冻品、干货；台账辐射 11 城、规划开店 7 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "南宁·南宁海鲜批发交易市场为一级批发市场（城市），主营活鲜、冰鲜、冻品、干货；台账辐射 11 座城市，规模等级 C。"
  },
  {
   "id": 12,
@@ -1724,7 +1642,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 77,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "苏州最大农产品批发市场，水产交易区规模居首",
@@ -1746,13 +1663,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "77",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "苏州最大农批·水产交易区",
     "source": "公开资料",
@@ -1760,7 +1670,8 @@ markets: [
    }
   ],
   "grade": "S",
-  "conclusion": "苏州·苏州南环桥水产市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 城、规划开店 77 家，覆盖能力等级 S。"
+  "source": "ledger",
+  "conclusion": "苏州·苏州南环桥水产市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 座城市，规模等级 S。"
  },
  {
   "id": 13,
@@ -1792,7 +1703,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 64,
   "tier": 1,
   "tierLabel": "一级批发市场（城市）",
   "scale": "上海中心城区以北最大水产批发市场群",
@@ -1814,13 +1724,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "64",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "上海主要水产批发市场群",
     "source": "公开资料",
@@ -1828,7 +1731,8 @@ markets: [
    }
   ],
   "grade": "S",
-  "conclusion": "上海·上海市江阳水产市场为一级批发市场（城市），主营活鲜、冰鲜、冻品、贝类；台账辐射 14 城、规划开店 64 家，覆盖能力等级 S。"
+  "source": "ledger",
+  "conclusion": "上海·上海市江阳水产市场为一级批发市场（城市），主营活鲜、冰鲜、冻品、贝类；台账辐射 14 座城市，规模等级 S。"
  },
  {
   "id": 14,
@@ -1870,7 +1774,6 @@ markets: [
    "河南省",
    "湖北省"
   ],
-  "plan": 28,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "合肥最大农产品物流园，水产板块区域集散",
@@ -1891,13 +1794,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "28",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "合肥最大农产品物流园",
     "source": "公开资料",
@@ -1905,7 +1801,8 @@ markets: [
    }
   ],
   "grade": "B",
-  "conclusion": "合肥·合肥周谷堆大兴农产品物流园为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 23 城、规划开店 28 家，覆盖能力等级 B。"
+  "source": "ledger",
+  "conclusion": "合肥·合肥周谷堆大兴农产品物流园为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 23 座城市，规模等级 B。"
  },
  {
   "id": 15,
@@ -1939,7 +1836,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 61,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "南通最大农副产品批发中心，水产肉类供销两旺",
@@ -1960,13 +1856,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "61",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "南通最大农副产品批发中心",
     "source": "南通日报",
@@ -1974,7 +1863,8 @@ markets: [
    }
   ],
   "grade": "S",
-  "conclusion": "南通·南通沪蔬通农副产品批发中心为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 15 城、规划开店 61 家，覆盖能力等级 S。"
+  "source": "ledger",
+  "conclusion": "南通·南通沪蔬通农副产品批发中心为一级批发市场，主营活鲜、冰鲜、冻品、贝类；台账辐射 15 座城市，规模等级 S。"
  },
  {
   "id": 16,
@@ -2014,7 +1904,6 @@ markets: [
    "江苏省",
    "浙江省"
   ],
-  "plan": 81,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "无锡最大农产品批发市场，水产区年交易额数十亿元",
@@ -2036,13 +1925,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "81",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "年交易额",
     "value": "数十亿元（市场整体）",
     "source": "公开资料",
@@ -2050,7 +1932,8 @@ markets: [
    }
   ],
   "grade": "S",
-  "conclusion": "无锡·无锡天鹏水产市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 21 城、规划开店 81 家，覆盖能力等级 S。"
+  "source": "ledger",
+  "conclusion": "无锡·无锡天鹏水产市场为一级批发市场，主营活鲜、冰鲜、冻品、河鲜；台账辐射 21 座城市，规模等级 S。"
  },
  {
   "id": 17,
@@ -2078,7 +1961,6 @@ markets: [
    "江西省",
    "福建省"
   ],
-  "plan": 6,
   "tier": 2,
   "tierLabel": "二级批发市场（产地型）",
   "scale": "潮阳产地收购型市场，辐射粤东与闽西南",
@@ -2098,13 +1980,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "6",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "产地收购集散市场",
     "source": "公开资料",
@@ -2112,7 +1987,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "汕头·汕头潮阳和平水产市场为二级批发市场（产地型），主营活鲜、冰鲜、海捕、贝类；台账辐射 10 城、规划开店 6 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "汕头·汕头潮阳和平水产市场为二级批发市场（产地型），主营活鲜、冰鲜、海捕、贝类；台账辐射 10 座城市，规模等级 C。"
  },
  {
   "id": 18,
@@ -2141,7 +2017,6 @@ markets: [
    "江西省",
    "福建省"
   ],
-  "plan": 11,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "粤东重要水产批发与冷链集散平台",
@@ -2161,13 +2036,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "11",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "粤东水产批发+冷链物流",
     "source": "公开资料",
@@ -2175,7 +2043,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "汕头·汕头天环水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；台账辐射 11 城、规划开店 11 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "汕头·汕头天环水产批发市场为一级批发市场，主营活鲜、冰鲜、冻品、干货；台账辐射 11 座城市，规模等级 C。"
  },
  {
   "id": 19,
@@ -2206,7 +2075,6 @@ markets: [
    "广东省",
    "广西壮族自治区"
   ],
-  "plan": 54,
   "tier": 2,
   "tierLabel": "二级批发市场（产地码头）",
   "scale": "台山广海湾产地渔港码头型市场，一手海捕货源",
@@ -2227,13 +2095,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "54",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "产地渔港码头市场",
     "source": "公开资料",
@@ -2241,7 +2102,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "江门·江门广海渔人码头水产交易市场为二级批发市场（产地码头），主营海捕、活鲜、冰鲜、贝类；台账辐射 14 城、规划开店 54 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "江门·江门广海渔人码头水产交易市场为二级批发市场（产地码头），主营海捕、活鲜、冰鲜、贝类；台账辐射 14 座城市，规模等级 A。"
  },
  {
   "id": 20,
@@ -2273,7 +2135,6 @@ markets: [
    "广东省",
    "广西壮族自治区"
   ],
-  "plan": 54,
   "tier": 1,
   "tierLabel": "一级批发市场（区域）",
   "scale": "珠江西岸最大水产产业综合体",
@@ -2294,13 +2155,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "54",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "珠江西岸最大水产产业综合体",
     "source": "开业报道",
@@ -2308,7 +2162,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "江门·江门远恒农水产品交易中心为一级批发市场（区域），主营活鲜、冰鲜、冻品、干货；台账辐射 15 城、规划开店 54 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "江门·江门远恒农水产品交易中心为一级批发市场（区域），主营活鲜、冰鲜、冻品、干货；台账辐射 15 座城市，规模等级 A。"
  },
  {
   "id": 21,
@@ -2340,7 +2195,6 @@ markets: [
    "贵州省",
    "重庆市"
   ],
-  "plan": 5,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "重庆规模最大的水产综合交易市场",
@@ -2361,13 +2215,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "5",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "重庆最大水产综合市场",
     "source": "公开资料",
@@ -2375,7 +2222,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "重庆·重庆‑三亚湾水产综合交易市场为一级批发市场，主营活鲜、冻品、干货、河鲜；台账辐射 13 城、规划开店 5 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "重庆·重庆‑三亚湾水产综合交易市场为一级批发市场，主营活鲜、冻品、干货、河鲜；台账辐射 13 座城市，规模等级 C。"
  },
  {
   "id": 22,
@@ -2408,7 +2256,6 @@ markets: [
    "四川省",
    "重庆市"
   ],
-  "plan": 16,
   "tier": 2,
   "tierLabel": "二级批发市场（城市分销）",
   "scale": "成都市区历史最久的水产批发市场，现以城市分销与零售为主",
@@ -2429,13 +2276,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "16",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "成都市区分销+零售市场",
     "source": "公开资料",
@@ -2443,7 +2283,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "成都·成都‑青石桥海鲜市场为二级批发市场（城市分销），主营活鲜、冻品、干货、河鲜；台账辐射 16 城、规划开店 16 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "成都·成都‑青石桥海鲜市场为二级批发市场（城市分销），主营活鲜、冻品、干货、河鲜；台账辐射 16 座城市，规模等级 C。"
  },
  {
   "id": 23,
@@ -2477,7 +2318,6 @@ markets: [
    "四川省",
    "重庆市"
   ],
-  "plan": 16,
   "tier": 1,
   "tierLabel": "一级批发市场（区域）",
   "scale": "西南规模最大的水产批发市场（通威三联），原表以地址登记",
@@ -2499,13 +2339,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "16",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "西南最大水产批发市场",
     "source": "公开资料",
@@ -2513,7 +2346,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "成都·成都通威三联水产品市场为一级批发市场（区域），主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 城、规划开店 16 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "成都·成都通威三联水产品市场为一级批发市场（区域），主营活鲜、冰鲜、冻品、河鲜；台账辐射 17 座城市，规模等级 C。"
  },
  {
   "id": 24,
@@ -2543,7 +2377,6 @@ markets: [
    "广西壮族自治区",
    "贵州省"
   ],
-  "plan": 3,
   "tier": 1,
   "tierLabel": "一级批发市场（城市）",
   "scale": "贵阳主城区最主要的水产品批发市场",
@@ -2563,13 +2396,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "3",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "贵阳主要水产批发市场",
     "source": "公开资料",
@@ -2577,7 +2403,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "贵阳·贵阳‑贵州渔樵水产品综合市场为一级批发市场（城市），主营活鲜、冻品、干货、河鲜；台账辐射 12 城、规划开店 3 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "贵阳·贵阳‑贵州渔樵水产品综合市场为一级批发市场（城市），主营活鲜、冻品、干货、河鲜；台账辐射 12 座城市，规模等级 C。"
  },
  {
   "id": 25,
@@ -2610,7 +2437,6 @@ markets: [
    "广西壮族自治区",
    "贵州省"
   ],
-  "plan": 1,
   "tier": 1,
   "tierLabel": "一级批发市场（区域）",
   "scale": "云南最大干菜副食水产品市场，旺季日交易额超5000万元",
@@ -2630,13 +2456,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "1",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "旺季日交易额",
     "value": "超5000万元",
     "source": "官方报道",
@@ -2644,7 +2463,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "昆明·昆明‑骏骐干菜水产批发市场为一级批发市场（区域），主营冻品、干货、活鲜、河鲜；台账辐射 14 城、规划开店 1 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "昆明·昆明‑骏骐干菜水产批发市场为一级批发市场（区域），主营冻品、干货、活鲜、河鲜；台账辐射 14 座城市，规模等级 C。"
  },
  {
   "id": 26,
@@ -2681,7 +2501,6 @@ markets: [
    "山西省",
    "河南省"
   ],
-  "plan": 8,
   "tier": 1,
   "tierLabel": "一级批发市场（区域）",
   "scale": "中部最大农产品物流城，水产板块为区域枢纽",
@@ -2702,13 +2521,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "8",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "中部最大农产品物流城",
     "source": "公开资料",
@@ -2716,7 +2528,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "郑州·河南万邦国际农产品物流城为一级批发市场（区域），主营活鲜、冻品、干货、河鲜；台账辐射 19 城、规划开店 8 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "郑州·河南万邦国际农产品物流城为一级批发市场（区域），主营活鲜、冻品、干货、河鲜；台账辐射 19 座城市，规模等级 C。"
  },
  {
   "id": 27,
@@ -2741,7 +2554,6 @@ markets: [
    "天津市",
    "河北省"
   ],
-  "plan": 33,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "北京大红门区域最大的海鲜批发市场",
@@ -2762,13 +2574,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "33",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "北京主要海鲜批发市场",
     "source": "公开资料",
@@ -2776,7 +2581,8 @@ markets: [
    }
   ],
   "grade": "B",
-  "conclusion": "北京·北京大红门京深海鲜市场为一级批发市场，主营活鲜、冻品、干货、贝类；台账辐射 7 城、规划开店 33 家，覆盖能力等级 B。"
+  "source": "ledger",
+  "conclusion": "北京·北京大红门京深海鲜市场为一级批发市场，主营活鲜、冻品、干货、贝类；台账辐射 7 座城市，规模等级 B。"
  },
  {
   "id": 28,
@@ -2806,7 +2612,6 @@ markets: [
    "山东省",
    "河北省"
   ],
-  "plan": 34,
   "tier": 1,
   "tierLabel": "一级批发市场",
   "scale": "天津最大的海鲜批发市场（新红旗市场群）",
@@ -2826,13 +2631,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "34",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "年交易额",
     "value": "百亿级（历史口径）",
     "source": "北方网·2009",
@@ -2840,7 +2638,8 @@ markets: [
    }
   ],
   "grade": "B",
-  "conclusion": "天津·天津王顶堤海鲜市场为一级批发市场，主营活鲜、冻品、干货、贝类；台账辐射 11 城、规划开店 34 家，覆盖能力等级 B。"
+  "source": "ledger",
+  "conclusion": "天津·天津王顶堤海鲜市场为一级批发市场，主营活鲜、冻品、干货、贝类；台账辐射 11 座城市，规模等级 B。"
  },
  {
   "id": 29,
@@ -2870,7 +2669,6 @@ markets: [
    "山西省",
    "河北省"
   ],
-  "plan": 12,
   "tier": 2,
   "tierLabel": "二级批发市场（城市分销）",
   "scale": "石家庄主要海鲜批发兼零售市场之一",
@@ -2890,13 +2688,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "12",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "市场定位",
     "value": "石家庄四大海鲜市场之一",
     "source": "公开资料",
@@ -2904,7 +2695,8 @@ markets: [
    }
   ],
   "grade": "C",
-  "conclusion": "石家庄·金碧自由水鲜城为二级批发市场（城市分销），主营活鲜、冻品、干货、贝类；台账辐射 12 城、规划开店 12 家，覆盖能力等级 C。"
+  "source": "ledger",
+  "conclusion": "石家庄·金碧自由水鲜城为二级批发市场（城市分销），主营活鲜、冻品、干货、贝类；台账辐射 12 座城市，规模等级 C。"
  },
  {
   "id": 30,
@@ -2939,7 +2731,6 @@ markets: [
    "广东省",
    "广西壮族自治区"
   ],
-  "plan": 54,
   "tier": 1,
   "tierLabel": "一级批发市场（国家级）",
   "scale": "华南最大、全国性水产集散中心，日均约600吨供应全国",
@@ -2962,13 +2753,6 @@ markets: [
     "conf": "高"
    },
    {
-    "label": "规划开店容量",
-    "value": "54",
-    "unit": "家",
-    "source": "台账明细",
-    "conf": "高"
-   },
-   {
     "label": "日均供应量",
     "value": "约600吨",
     "source": "广州市政府",
@@ -2976,7 +2760,8 @@ markets: [
    }
   ],
   "grade": "A",
-  "conclusion": "广州·广州黄沙水产新市场为一级批发市场（国家级），主营活鲜、冰鲜、贝类、冻品；台账辐射 18 城、规划开店 54 家，覆盖能力等级 A。"
+  "source": "ledger",
+  "conclusion": "广州·广州黄沙水产新市场为一级批发市场（国家级），主营活鲜、冰鲜、贝类、冻品；台账辐射 18 座城市，规模等级 A。"
  }
 ],
 CITY2PROV: {"北京市": "北京市", "天津市": "天津市", "上海市": "上海市", "重庆市": "重庆市", "石家庄市": "河北省", "唐山市": "河北省", "秦皇岛市": "河北省", "邯郸市": "河北省", "邢台市": "河北省", "保定市": "河北省", "张家口市": "河北省", "承德市": "河北省", "沧州市": "河北省", "廊坊市": "河北省", "衡水市": "河北省", "太原市": "山西省", "大同市": "山西省", "阳泉市": "山西省", "长治市": "山西省", "晋城市": "山西省", "朔州市": "山西省", "晋中市": "山西省", "运城市": "山西省", "忻州市": "山西省", "临汾市": "山西省", "吕梁市": "山西省", "南京市": "江苏省", "无锡市": "江苏省", "徐州市": "江苏省", "常州市": "江苏省", "苏州市": "江苏省", "南通市": "江苏省", "连云港市": "江苏省", "淮安市": "江苏省", "盐城市": "江苏省", "扬州市": "江苏省", "镇江市": "江苏省", "泰州市": "江苏省", "宿迁市": "江苏省", "杭州市": "浙江省", "宁波市": "浙江省", "温州市": "浙江省", "嘉兴市": "浙江省", "湖州市": "浙江省", "绍兴市": "浙江省", "金华市": "浙江省", "衢州市": "浙江省", "舟山市": "浙江省", "台州市": "浙江省", "丽水市": "浙江省", "合肥市": "安徽省", "芜湖市": "安徽省", "蚌埠市": "安徽省", "淮南市": "安徽省", "马鞍山市": "安徽省", "淮北市": "安徽省", "铜陵市": "安徽省", "安庆市": "安徽省", "黄山市": "安徽省", "滁州市": "安徽省", "阜阳市": "安徽省", "宿州市": "安徽省", "六安市": "安徽省", "亳州市": "安徽省", "池州市": "安徽省", "宣城市": "安徽省", "福州市": "福建省", "厦门市": "福建省", "莆田市": "福建省", "三明市": "福建省", "泉州市": "福建省", "漳州市": "福建省", "南平市": "福建省", "龙岩市": "福建省", "宁德市": "福建省", "南昌市": "江西省", "景德镇市": "江西省", "萍乡市": "江西省", "九江市": "江西省", "新余市": "江西省", "鹰潭市": "江西省", "赣州市": "江西省", "吉安市": "江西省", "宜春市": "江西省", "抚州市": "江西省", "上饶市": "江西省", "济南市": "山东省", "青岛市": "山东省", "淄博市": "山东省", "枣庄市": "山东省", "东营市": "山东省", "烟台市": "山东省", "潍坊市": "山东省", "济宁市": "山东省", "泰安市": "山东省", "威海市": "山东省", "日照市": "山东省", "临沂市": "山东省", "德州市": "山东省", "聊城市": "山东省", "滨州市": "山东省", "菏泽市": "山东省", "郑州市": "河南省", "开封市": "河南省", "洛阳市": "河南省", "平顶山市": "河南省", "安阳市": "河南省", "鹤壁市": "河南省", "新乡市": "河南省", "焦作市": "河南省", "濮阳市": "河南省", "许昌市": "河南省", "漯河市": "河南省", "三门峡市": "河南省", "南阳市": "河南省", "商丘市": "河南省", "信阳市": "河南省", "周口市": "河南省", "驻马店市": "河南省", "济源市": "河南省", "武汉市": "湖北省", "黄石市": "湖北省", "十堰市": "湖北省", "宜昌市": "湖北省", "襄阳市": "湖北省", "鄂州市": "湖北省", "荆门市": "湖北省", "孝感市": "湖北省", "荆州市": "湖北省", "黄冈市": "湖北省", "咸宁市": "湖北省", "随州市": "湖北省", "恩施土家族苗族自治州": "湖北省", "仙桃市": "湖北省", "潜江市": "湖北省", "天门市": "湖北省", "长沙市": "湖南省", "株洲市": "湖南省", "湘潭市": "湖南省", "衡阳市": "湖南省", "邵阳市": "湖南省", "岳阳市": "湖南省", "常德市": "湖南省", "张家界市": "湖南省", "益阳市": "湖南省", "郴州市": "湖南省", "永州市": "湖南省", "怀化市": "湖南省", "娄底市": "湖南省", "湘西土家族苗族自治州": "湖南省", "广州市": "广东省", "深圳市": "广东省", "珠海市": "广东省", "汕头市": "广东省", "佛山市": "广东省", "韶关市": "广东省", "湛江市": "广东省", "肇庆市": "广东省", "江门市": "广东省", "茂名市": "广东省", "惠州市": "广东省", "梅州市": "广东省", "汕尾市": "广东省", "河源市": "广东省", "阳江市": "广东省", "清远市": "广东省", "东莞市": "广东省", "中山市": "广东省", "潮州市": "广东省", "揭阳市": "广东省", "云浮市": "广东省", "南宁市": "广西壮族自治区", "柳州市": "广西壮族自治区", "桂林市": "广西壮族自治区", "梧州市": "广西壮族自治区", "北海市": "广西壮族自治区", "防城港市": "广西壮族自治区", "钦州市": "广西壮族自治区", "贵港市": "广西壮族自治区", "玉林市": "广西壮族自治区", "百色市": "广西壮族自治区", "贺州市": "广西壮族自治区", "河池市": "广西壮族自治区", "来宾市": "广西壮族自治区", "崇左市": "广西壮族自治区", "成都市": "四川省", "自贡市": "四川省", "攀枝花市": "四川省", "泸州市": "四川省", "德阳市": "四川省", "绵阳市": "四川省", "广元市": "四川省", "遂宁市": "四川省", "内江市": "四川省", "乐山市": "四川省", "南充市": "四川省", "眉山市": "四川省", "宜宾市": "四川省", "广安市": "四川省", "达州市": "四川省", "雅安市": "四川省", "巴中市": "四川省", "资阳市": "四川省", "阿坝藏族羌族自治州": "四川省", "甘孜藏族自治州": "四川省", "凉山彝族自治州": "四川省", "贵阳市": "贵州省", "六盘水市": "贵州省", "遵义市": "贵州省", "安顺市": "贵州省", "毕节市": "贵州省", "铜仁市": "贵州省", "黔西南布依族苗族自治州": "贵州省", "黔东南苗族侗族自治州": "贵州省", "黔南布依族苗族自治州": "贵州省", "昆明市": "云南省", "曲靖市": "云南省", "玉溪市": "云南省", "保山市": "云南省", "昭通市": "云南省", "丽江市": "云南省", "普洱市": "云南省", "临沧市": "云南省", "楚雄彝族自治州": "云南省", "红河哈尼族彝族自治州": "云南省", "文山壮族苗族自治州": "云南省", "西双版纳傣族自治州": "云南省", "大理白族自治州": "云南省", "德宏傣族景颇族自治州": "云南省", "怒江傈僳族自治州": "云南省", "迪庆藏族自治州": "云南省", "西安市": "陕西省", "铜川市": "陕西省", "宝鸡市": "陕西省", "咸阳市": "陕西省", "渭南市": "陕西省", "延安市": "陕西省", "汉中市": "陕西省", "榆林市": "陕西省", "安康市": "陕西省", "商洛市": "陕西省", "兰州市": "甘肃省", "嘉峪关市": "甘肃省", "金昌市": "甘肃省", "白银市": "甘肃省", "天水市": "甘肃省", "武威市": "甘肃省", "张掖市": "甘肃省", "平凉市": "甘肃省", "酒泉市": "甘肃省", "庆阳市": "甘肃省", "定西市": "甘肃省", "陇南市": "甘肃省", "临夏回族自治州": "甘肃省", "甘南藏族自治州": "甘肃省"}
@@ -6525,13 +6310,12 @@ window.EXTRA_AUDIT = {
     A.ledgerCount = LEDGER_COUNT;
     A.extraCount = EXTRA_COUNT;
     A.pendingCount = A.markets.filter(function (m) { return String(m.status).indexOf("待") === 0; }).length;
-    A.totalPlan = A.markets.reduce(function (s, m) { return s + (m.plan || 0); }, 0);
     A.provCount = Object.keys(provSet).length;
   })();
 
   var METRICS = {
     markets: A.totalMarkets, cities: A.cities.length, coverage: A.coverageCityCount,
-    plan: A.totalPlan, tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
+    tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
     ledger: A.ledgerCount, extra: A.extraCount, pending: A.pendingCount, provs: A.provCount
   };
   $$("[data-metric]").forEach(function (el) {
@@ -6842,7 +6626,7 @@ window.EXTRA_AUDIT = {
 
     var dots = document.createElementNS(ns, "g");
     dots.setAttribute("id", "dots-g");
-    var sorted = A.markets.slice().sort(function (a, b) { return a.plan - b.plan; });
+    var sorted = A.markets.slice().sort(function (a, b) { return (a.coverage || []).length - (b.coverage || []).length; });
     sorted.forEach(function (m) {
       var grp = document.createElementNS(ns, "g");
       grp.setAttribute("class", "mk");
@@ -6892,8 +6676,8 @@ window.EXTRA_AUDIT = {
       '<div class="tt-meta"><i style="background:var(--t' + m.tier + ');box-shadow:0 0 6px var(--t' + m.tier + ')"></i>' +
       m.city + " · " + m.tierLabel + "</div>" +
       '<div class="tt-foot">' + (m.coverage.length
-        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
-        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待复核" : "已核查") + "</span>") + "</div>";
+        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规模等级 <b>" + m.grade + "</b></span>"
+        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待核实" : "已核查") + "</span>") + "</div>";
     var rect = stage.getBoundingClientRect();
     var px = rect.left + (x / 1000) * rect.width;
     var py = rect.top + (y / 760) * rect.height;
@@ -6983,7 +6767,7 @@ window.EXTRA_AUDIT = {
   });
 
   /* ─────────── 名录 ─────────── */
-  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortPlan: true };
+  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortCoverage: true };
   var grid = $("#dir-grid"), countEl = $("#dir-count");
   var sortBtn = $("#dir-sort");
 
@@ -7026,8 +6810,8 @@ window.EXTRA_AUDIT = {
       }
       return true;
     }).sort(function (a, b) {
-      if (!dirState.sortPlan) return a.id - b.id;
-      return (b.plan || -1) - (a.plan || -1) || a.id - b.id;
+      if (!dirState.sortCoverage) return a.id - b.id;
+      return (b.coverage || []).length - (a.coverage || []).length || a.id - b.id;
     });
   }
 
@@ -7045,9 +6829,9 @@ window.EXTRA_AUDIT = {
         '<div class="dc-cats">' + cats.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
         (more > 0 ? '<span class="more">+' + more + "</span>" : "") + "</div>" +
         '<div class="dc-foot">' + (m.coverage.length
-          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
-          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待实地复核" : "已核查") + "</span>") +
-        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="' + (m.coverage.length ? "覆盖能力 " : "规模评估 ") + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
+          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规模等级 <b>" + m.grade + "</b></span>"
+          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待核实" : "已核查") + "</span>") +
+        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="规模等级 ' + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
       "</article>"
     );
   }
@@ -7116,8 +6900,8 @@ window.EXTRA_AUDIT = {
       });
     }
     sortBtn.addEventListener("click", function () {
-      dirState.sortPlan = !dirState.sortPlan;
-      sortBtn.querySelector("span").textContent = dirState.sortPlan ? "按门店容量" : "按编号";
+      dirState.sortCoverage = !dirState.sortCoverage;
+      sortBtn.querySelector("span").textContent = dirState.sortCoverage ? "按覆盖城市" : "按编号";
       renderGrid();
     });
     renderGrid();
@@ -7140,16 +6924,13 @@ window.EXTRA_AUDIT = {
     var many = m.coverage.length > 14;
     var coverage = m.coverage.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
       (many ? '<button class="dw-cover-more" data-cover-more>展开全部 ' + m.coverage.length + " 城</button>" : "");
-    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan || 0; }));
+    var gradeBlock = '<div class="dw-block"><h3>规模等级</h3><p class="dw-scale" style="font-size:13px"><b>' + m.grade + " · " + GRADE_NAME[m.grade] + "</b>　"
+      + (m.coverage.length
+        ? "综合辐射城市数与集散规模评估；台账登记覆盖 " + m.coverage.length + " 座城市。"
+        : "该市场为公开资料补充核查对象，台账未登记其覆盖城市范围，等级由公开资料评估。") + "</p></div>";
     var coverBlock = m.coverage.length
       ? '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>"
       : '<div class="dw-block"><h3>覆盖范围</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查，台账未登记覆盖城市列表；地图高亮其所在省份 <b>' + (m.prov || "") + "</b>。</p></div>";
-    var planBlock = (m.plan !== null && m.plan !== undefined)
-      ? '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
-        '<div class="dw-plan-num">' + m.plan + "</div>" +
-        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
-        "<p>占台账最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>"
-      : '<div class="dw-block"><h3>台账数据</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查对象，台账未登记「覆盖城市列表」与「规划开店容量」，故不参与容量等级推算；规模等级 <b>' + m.grade + "（" + GRADE_NAME[m.grade] + "）</b>由公开资料评估。</p></div>";
     var provChip = m.prov ? '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' + m.prov + "</span>" : "";
     return (
       '<div class="dw-head">' +
@@ -7165,7 +6946,7 @@ window.EXTRA_AUDIT = {
       '<div class="dw-block"><h3>供应能力画像</h3><p class="dw-scale">' + m.scale + "</p></div>" +
       '<div class="dw-block"><h3>规模与能力指标</h3><div class="dw-figures">' + figures + "</div></div>" +
       '<div class="dw-block"><h3>供应品类</h3><div class="dw-cats">' + cats + "</div></div>" +
-      coverBlock + planBlock +
+      coverBlock + gradeBlock +
       '<div class="dw-block"><p class="dw-conclusion">' + m.conclusion + "</p>" +
       (m.nameNote ? '<p class="dw-note">※ ' + m.nameNote + "</p>" : "") + "</div>" +
       '<div class="dw-block"><h3>位置信息</h3><p class="dw-scale" style="font-size:13px">' + m.address +
@@ -7188,8 +6969,6 @@ window.EXTRA_AUDIT = {
     document.body.style.overflow = "hidden";
     var closeBtn = $("#drawer-close");
     if (closeBtn && !isTouch) closeBtn.focus({ preventScroll: true });
-    var bar = $(".dw-plan-bar", drawerBody);
-    if (bar) setTimeout(function () { bar.style.width = bar.getAttribute("data-w") + "%"; }, 120);
     var more = $("[data-cover-more]", drawerBody);
     if (more) more.addEventListener("click", function () {
       var cover = $(".dw-cover", drawerBody);

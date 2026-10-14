@@ -42,13 +42,12 @@
     A.ledgerCount = LEDGER_COUNT;
     A.extraCount = EXTRA_COUNT;
     A.pendingCount = A.markets.filter(function (m) { return String(m.status).indexOf("待") === 0; }).length;
-    A.totalPlan = A.markets.reduce(function (s, m) { return s + (m.plan || 0); }, 0);
     A.provCount = Object.keys(provSet).length;
   })();
 
   var METRICS = {
     markets: A.totalMarkets, cities: A.cities.length, coverage: A.coverageCityCount,
-    plan: A.totalPlan, tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
+    tier1: A.tierCount[1] || 0, tier2: A.tierCount[2] || 0, tier3: A.tierCount[3] || 0,
     ledger: A.ledgerCount, extra: A.extraCount, pending: A.pendingCount, provs: A.provCount
   };
   $$("[data-metric]").forEach(function (el) {
@@ -359,7 +358,7 @@
 
     var dots = document.createElementNS(ns, "g");
     dots.setAttribute("id", "dots-g");
-    var sorted = A.markets.slice().sort(function (a, b) { return a.plan - b.plan; });
+    var sorted = A.markets.slice().sort(function (a, b) { return (a.coverage || []).length - (b.coverage || []).length; });
     sorted.forEach(function (m) {
       var grp = document.createElementNS(ns, "g");
       grp.setAttribute("class", "mk");
@@ -409,8 +408,8 @@
       '<div class="tt-meta"><i style="background:var(--t' + m.tier + ');box-shadow:0 0 6px var(--t' + m.tier + ')"></i>' +
       m.city + " · " + m.tierLabel + "</div>" +
       '<div class="tt-foot">' + (m.coverage.length
-        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
-        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待复核" : "已核查") + "</span>") + "</div>";
+        ? "<span>辐射 " + m.coverage.length + " 城</span><span>规模等级 <b>" + m.grade + "</b></span>"
+        : "<span>" + (m.provShort || m.city) + " · 补充核查</span><span>" + (String(m.status).indexOf("待") === 0 ? "待核实" : "已核查") + "</span>") + "</div>";
     var rect = stage.getBoundingClientRect();
     var px = rect.left + (x / 1000) * rect.width;
     var py = rect.top + (y / 760) * rect.height;
@@ -500,7 +499,7 @@
   });
 
   /* ─────────── 名录 ─────────── */
-  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortPlan: true };
+  var dirState = { q: "", city: "", tier: 0, cat: "", src: "", sortCoverage: true };
   var grid = $("#dir-grid"), countEl = $("#dir-count");
   var sortBtn = $("#dir-sort");
 
@@ -543,8 +542,8 @@
       }
       return true;
     }).sort(function (a, b) {
-      if (!dirState.sortPlan) return a.id - b.id;
-      return (b.plan || -1) - (a.plan || -1) || a.id - b.id;
+      if (!dirState.sortCoverage) return a.id - b.id;
+      return (b.coverage || []).length - (a.coverage || []).length || a.id - b.id;
     });
   }
 
@@ -562,9 +561,9 @@
         '<div class="dc-cats">' + cats.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
         (more > 0 ? '<span class="more">+' + more + "</span>" : "") + "</div>" +
         '<div class="dc-foot">' + (m.coverage.length
-          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规划 <b>" + m.plan + "</b> 店</span>"
-          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待实地复核" : "已核查") + "</span>") +
-        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="' + (m.coverage.length ? "覆盖能力 " : "规模评估 ") + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
+          ? "<span>辐射 <b>" + m.coverage.length + "</b> 城</span><span>规模等级 <b>" + m.grade + "</b></span>"
+          : "<span><b>" + (m.provShort || m.city) + "</b> 公开资料</span><span>" + (String(m.status).indexOf("待") === 0 ? "待核实" : "已核查") + "</span>") +
+        '<i class="dc-grade ' + GRADE_CLS[m.grade] + '" title="规模等级 ' + GRADE_NAME[m.grade] + '">' + m.grade + "</i></div>" +
       "</article>"
     );
   }
@@ -633,8 +632,8 @@
       });
     }
     sortBtn.addEventListener("click", function () {
-      dirState.sortPlan = !dirState.sortPlan;
-      sortBtn.querySelector("span").textContent = dirState.sortPlan ? "按门店容量" : "按编号";
+      dirState.sortCoverage = !dirState.sortCoverage;
+      sortBtn.querySelector("span").textContent = dirState.sortCoverage ? "按覆盖城市" : "按编号";
       renderGrid();
     });
     renderGrid();
@@ -657,16 +656,13 @@
     var many = m.coverage.length > 14;
     var coverage = m.coverage.map(function (c) { return "<span>" + c + "</span>"; }).join("") +
       (many ? '<button class="dw-cover-more" data-cover-more>展开全部 ' + m.coverage.length + " 城</button>" : "");
-    var maxPlan = Math.max.apply(null, A.markets.map(function (x) { return x.plan || 0; }));
+    var gradeBlock = '<div class="dw-block"><h3>规模等级</h3><p class="dw-scale" style="font-size:13px"><b>' + m.grade + " · " + GRADE_NAME[m.grade] + "</b>　"
+      + (m.coverage.length
+        ? "综合辐射城市数与集散规模评估；台账登记覆盖 " + m.coverage.length + " 座城市。"
+        : "该市场为公开资料补充核查对象，台账未登记其覆盖城市范围，等级由公开资料评估。") + "</p></div>";
     var coverBlock = m.coverage.length
       ? '<div class="dw-block"><h3>覆盖城市 <em style="font-style:normal;color:var(--dim);letter-spacing:.1em">(' + m.coverage.length + ")</em></h3><div class=\"dw-cover\">" + coverage + "</div></div>"
       : '<div class="dw-block"><h3>覆盖范围</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查，台账未登记覆盖城市列表；地图高亮其所在省份 <b>' + (m.prov || "") + "</b>。</p></div>";
-    var planBlock = (m.plan !== null && m.plan !== undefined)
-      ? '<div class="dw-block"><h3>规划开店容量</h3><div class="dw-plan">' +
-        '<div class="dw-plan-num">' + m.plan + "</div>" +
-        '<div class="dw-plan-meta"><div class="dw-plan-track"><div class="dw-plan-bar" data-w="' + (m.plan / maxPlan * 100) + '"></div></div>' +
-        "<p>占台账最大容量 " + maxPlan + " 家的 " + Math.round(m.plan / maxPlan * 100) + "% · 台账口径</p></div></div></div>"
-      : '<div class="dw-block"><h3>台账数据</h3><p class="dw-scale" style="font-size:13px">该市场为公开资料补充核查对象，台账未登记「覆盖城市列表」与「规划开店容量」，故不参与容量等级推算；规模等级 <b>' + m.grade + "（" + GRADE_NAME[m.grade] + "）</b>由公开资料评估。</p></div>";
     var provChip = m.prov ? '<span class="dw-chip" style="color:var(--muted);border-color:var(--line)">' + m.prov + "</span>" : "";
     return (
       '<div class="dw-head">' +
@@ -682,7 +678,7 @@
       '<div class="dw-block"><h3>供应能力画像</h3><p class="dw-scale">' + m.scale + "</p></div>" +
       '<div class="dw-block"><h3>规模与能力指标</h3><div class="dw-figures">' + figures + "</div></div>" +
       '<div class="dw-block"><h3>供应品类</h3><div class="dw-cats">' + cats + "</div></div>" +
-      coverBlock + planBlock +
+      coverBlock + gradeBlock +
       '<div class="dw-block"><p class="dw-conclusion">' + m.conclusion + "</p>" +
       (m.nameNote ? '<p class="dw-note">※ ' + m.nameNote + "</p>" : "") + "</div>" +
       '<div class="dw-block"><h3>位置信息</h3><p class="dw-scale" style="font-size:13px">' + m.address +
@@ -705,8 +701,6 @@
     document.body.style.overflow = "hidden";
     var closeBtn = $("#drawer-close");
     if (closeBtn && !isTouch) closeBtn.focus({ preventScroll: true });
-    var bar = $(".dw-plan-bar", drawerBody);
-    if (bar) setTimeout(function () { bar.style.width = bar.getAttribute("data-w") + "%"; }, 120);
     var more = $("[data-cover-more]", drawerBody);
     if (more) more.addEventListener("click", function () {
       var cover = $(".dw-cover", drawerBody);

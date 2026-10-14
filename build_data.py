@@ -190,16 +190,15 @@ for row in rows:
     unknown = [c for c in coverage if not CITY2PROV.get(c)]
     if unknown:
         print("WARN unknown cities for", sid, unknown)
-    figures = [dict(label="辐射城市", value=f"{len(coverage)} 城", unit="", source="台账明细", conf="高"),
-               dict(label="规划开店容量", value=str(plan), unit="家", source="台账明细", conf="高")]
+    figures = [dict(label="辐射城市", value=f"{len(coverage)} 城", unit="", source="台账明细", conf="高")]
     figures += e["extra"]
     markets.append(dict(
         id=sid, city=city, name=name, regName=reg_name.strip(), nameNote=name_note,
         address=addr.strip(), lng=round(lng, 6), lat=round(lat, 6),
-        coverage=coverage, provinces=provs, plan=plan,
+        coverage=coverage, provinces=provs,
         tier=e["tier"], tierLabel=e["tierLabel"], scale=e["scale"], cats=e["cats"],
-        status=e["status"], figures=figures, grade=grade_of(plan),
-        conclusion=f"{city}·{name}为{e['tierLabel']}，主营{'、'.join(e['cats'][:4])}；台账辐射 {len(coverage)} 城、规划开店 {plan} 家，覆盖能力等级 {grade_of(plan)}。",
+        status=e["status"], figures=figures, grade=grade_of(plan), source="ledger",
+        conclusion=f"{city}·{name}为{e['tierLabel']}，主营{'、'.join(e['cats'][:4])}；台账辐射 {len(coverage)} 座城市，规模等级 {grade_of(plan)}。",
     ))
 
 cities = sorted({m["city"] for m in markets})
@@ -209,7 +208,6 @@ grade_count = {"S": 0, "A": 0, "B": 0, "C": 0}
 for m in markets:
     tier_count[m["tier"]] += 1
     grade_count[m["grade"]] += 1
-total_plan = sum(m["plan"] for m in markets)
 cat_count = {}
 for m in markets:
     for c in m["cats"]:
@@ -217,10 +215,10 @@ for m in markets:
 cats_sorted = sorted(cat_count.items(), key=lambda x: -x[1])
 
 print("markets:", len(markets), "| cities:", len(cities), "| coverage cities:", len(coverage_cities),
-      "| total plan:", total_plan, "| tier:", tier_count, "| grade:", grade_count)
+      "| tier:", tier_count, "| grade:", grade_count)
 
 js = "/* 自动生成：build_data.py · 数据来源《水产批发市场明细.xlsx》+ 公开资料核查（含置信度标注） */\n"
-js += f"window.AUDIT = {{generated: '2026-10', sourceFile: '水产批发市场明细.xlsx', totalPlan: {total_plan},"
+js += f"window.AUDIT = {{generated: '2026-10', sourceFile: '水产批发市场明细.xlsx',"
 js += f" tierCount: {json.dumps(tier_count, ensure_ascii=False)}, gradeCount: {json.dumps(grade_count, ensure_ascii=False)},"
 js += f" catCount: {json.dumps([list(x) for x in cats_sorted], ensure_ascii=False)},\n"
 js += f"cities: {json.dumps(cities, ensure_ascii=False)},\n"
