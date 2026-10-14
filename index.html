@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20260808c">
 </head>
 <body class="is-loading">
 <noscript><style>.reveal,.reveal-hero,.hero-title .ch{opacity:1!important;transform:none!important;filter:none!important}#preloader{display:none!important}</style></noscript>
@@ -24,13 +24,18 @@
 
 <!-- ══════════ 预加载 ══════════ -->
 <div id="preloader" aria-hidden="true">
-  <div class="pre-mark">
-    <svg viewBox="0 0 64 64"><path d="M8 30c7-9 14-11 21-6.5S43 27 56 16" /><path d="M8 40c7-9 14-11 21-6.5S43 37 56 26" /></svg>
+  <div class="pre-bg" aria-hidden="true"></div>
+  <div class="pre-inner">
+    <div class="pre-mark">
+      <svg viewBox="0 0 64 64"><path d="M8 30c7-9 14-11 21-6.5S43 27 56 16" /><path d="M8 40c7-9 14-11 21-6.5S43 37 56 26" /></svg>
+    </div>
+    <h2 class="pre-welcome">欢迎来到<i>「</i><b>杜海欣海鲜科技空间</b><i>」</i></h2>
+    <p class="pre-sub">海鲜水产批发市场 · 供应能力全景核查</p>
+    <div class="pre-num"><span id="pre-count">0</span><em>%</em></div>
+    <div class="pre-line"><i></i></div>
+    <p class="pre-label">正在校准潮汐数据…</p>
   </div>
-  <p class="pre-welcome">欢迎来到<i>「</i><b>杜海欣海鲜科技空间</b><i>」</i></p>
-  <div class="pre-num"><span id="pre-count">0</span><em>%</em></div>
-  <div class="pre-line"><i></i></div>
-  <p class="pre-label">正在校准潮汐数据…</p>
+  <button class="pre-skip" id="pre-skip" type="button">跳过片头 · SKIP</button>
 </div>
 
 <!-- ══════════ 导航 ══════════ -->
@@ -338,10 +343,10 @@
 
 <button id="toTop" aria-label="回到顶部" data-hover><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>
 
-<script src="assets/js/china-geo.js"></script>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/data-extra.js"></script>
-<script src="assets/js/ocean.js"></script>
-<script src="assets/js/app.js"></script>
+<script src="assets/js/china-geo.js?v=20260808c"></script>
+<script src="assets/js/data.js?v=20260808c"></script>
+<script src="assets/js/data-extra.js?v=20260808c"></script>
+<script src="assets/js/ocean.js?v=20260808c"></script>
+<script src="assets/js/app.js?v=20260808c"></script>
 </body>
 </html>

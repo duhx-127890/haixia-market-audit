@@ -65,25 +65,38 @@
     if (v !== undefined) el.textContent = Math.round((v / A.totalMarkets) * 100);
   });
 
-  /* ─────────── 预加载 ─────────── */
+  /* ─────────── 片头 / 预加载 ─────────── */
   (function preload() {
-    var el = $("#preloader"), num = $("#pre-count"), line = $(".pre-line i");
+    var el = $("#preloader"), num = $("#pre-count"), line = $(".pre-line i"), skip = $("#pre-skip");
     if (!el) return;
-    var t0 = performance.now(), DUR = reduced ? 200 : 1750;
+    /* 片头时长：正常 2.8s（含结尾停顿）；「减少动态效果」下仍保留 1.8s 静态展示，不再一闪而过 */
+    var DUR = reduced ? 1600 : 2600;
+    var HOLD = reduced ? 200 : 320;
+    var t0 = performance.now(), finished = false;
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      el.classList.add("done");
+      document.body.classList.remove("is-loading");
+      document.body.classList.add("ready");
+      setTimeout(function () { el.style.display = "none"; }, 1300);
+    }
     function step(now) {
       var p = Math.min((now - t0) / DUR, 1);
       var eased = 1 - Math.pow(1 - p, 3);
       var v = Math.round(eased * 100);
       num.textContent = v;
       line.style.width = (eased * 100) + "%";
-      if (p < 1) { requestAnimationFrame(step); }
-      else {
-        el.classList.add("done");
-        document.body.classList.remove("is-loading");
-        document.body.classList.add("ready");
-      }
+      if (p < 1) requestAnimationFrame(step);
+      else setTimeout(finish, HOLD);
     }
     requestAnimationFrame(step);
+    /* 跳过：按钮 / 点击任意处 / 任意按键 */
+    if (skip) skip.addEventListener("click", function (e) { e.stopPropagation(); finish(); });
+    el.addEventListener("click", function (e) { if (!e.target.closest("#pre-skip")) finish(); });
+    document.addEventListener("keydown", function () { if (!finished) finish(); });
+    window.__preloaderDone = function () { return finished; };
   })();
 
   /* ─────────── 标题拆字 ─────────── */

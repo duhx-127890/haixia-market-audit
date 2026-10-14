@@ -79,39 +79,67 @@ body.cursor-hide #cursor-dot,body.cursor-hide #cursor-ring{opacity:0}
 #progress i{display:block;height:100%;width:0;
   background:linear-gradient(90deg,var(--teal),var(--cyan),var(--gold));box-shadow:0 0 14px rgba(103,232,249,.8)}
 
-/* ---------- 预加载 ---------- */
+/* ---------- 片头 / 预加载 ---------- */
 #preloader{
-  position:fixed;inset:0;z-index:4000;background:#030712;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:26px;
-  transition:opacity .7s var(--ease),visibility .7s;
+  position:fixed;inset:0;z-index:4000;background:#02060f;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  clip-path:inset(0 0 0 0);transition:clip-path 1.05s var(--ease),opacity .7s ease .35s,visibility .7s;
 }
-#preloader.done{opacity:0;visibility:hidden}
-.pre-mark{width:64px;height:64px;position:relative}
-.pre-mark svg{width:100%;height:100%;fill:none;stroke:var(--cyan);stroke-width:3.4;stroke-linecap:round}
-.pre-mark svg path{stroke-dasharray:120;stroke-dashoffset:120;animation:draw 1.6s var(--ease) forwards}
-.pre-mark svg path:last-child{stroke:var(--teal);animation-delay:.25s;opacity:.8}
+#preloader.done{clip-path:inset(0 0 100% 0);opacity:0;visibility:hidden;pointer-events:none}
+.pre-bg{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 50% 42%,rgba(20,70,105,.55),transparent 70%),
+    radial-gradient(45% 35% at 18% 78%,rgba(45,212,191,.16),transparent 72%),
+    radial-gradient(45% 35% at 84% 22%,rgba(103,232,249,.13),transparent 72%),
+    linear-gradient(180deg,#02060f,#04101f 55%,#02060f)}
+.pre-bg::after{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:radial-gradient(rgba(150,205,240,.22) 1px,transparent 1px);
+  background-size:34px 34px;
+  -webkit-mask-image:radial-gradient(60% 55% at 50% 45%,#000,transparent 78%);
+  mask-image:radial-gradient(60% 55% at 50% 45%,#000,transparent 78%)}
+.pre-inner{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;
+  gap:20px;text-align:center;padding:0 24px;transition:transform 1s var(--ease),opacity .6s ease .2s}
+#preloader.done .pre-inner{transform:translateY(-34px);opacity:0}
+.pre-mark{width:72px;height:72px;position:relative}
+.pre-mark svg{width:100%;height:100%;fill:none;stroke:var(--cyan);stroke-width:3.4;stroke-linecap:round;
+  filter:drop-shadow(0 0 14px rgba(103,232,249,.45))}
+.pre-mark svg path{stroke-dasharray:120;stroke-dashoffset:120;animation:draw 1.5s var(--ease) .1s forwards}
+.pre-mark svg path:last-child{stroke:var(--teal);animation-delay:.35s;opacity:.8}
 @keyframes draw{to{stroke-dashoffset:0}}
-.pre-num{font-size:clamp(44px,8vw,72px);font-weight:300;letter-spacing:.06em;display:flex;align-items:baseline;gap:2px}
-.pre-num em{font-size:.35em;color:var(--cyan);font-style:normal}
-.pre-num span{font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
-.pre-line{width:min(320px,60vw);height:1px;background:rgba(140,190,235,.16);overflow:hidden}
-.pre-line i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--cyan));transition:width .2s}
-.pre-label{font-size:12px;letter-spacing:.5em;color:var(--dim);text-transform:uppercase}
 /* 开场欢迎语 */
 .pre-welcome{
-  display:flex;align-items:baseline;gap:2px;text-align:center;
-  font-family:var(--serif);font-weight:600;font-size:clamp(18px,2.6vw,30px);
-  letter-spacing:.12em;color:rgba(233,244,252,.94);line-height:1.5;
-  opacity:0;transform:translateY(16px);filter:blur(10px);
-  animation:preWelcome 1.2s var(--ease) .2s both;
+  display:flex;align-items:baseline;justify-content:center;flex-wrap:wrap;gap:2px;
+  font-family:var(--serif);font-weight:600;font-size:clamp(22px,3.6vw,46px);
+  letter-spacing:.1em;color:rgba(236,246,253,.96);line-height:1.45;margin:0;
+  opacity:0;transform:translateY(22px) scale(.97);filter:blur(12px);
+  animation:preWelcome 1.3s var(--ease) .35s both;
 }
 .pre-welcome b{
-  font-weight:700;background:linear-gradient(110deg,var(--cyan),var(--teal) 50%,var(--gold));
+  font-weight:700;background:linear-gradient(110deg,#fff 8%,var(--cyan) 45%,var(--teal) 72%,var(--gold));
   -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 0 42px rgba(103,232,249,.35);
+  filter:drop-shadow(0 0 30px rgba(103,232,249,.4));
+  background-size:220% 100%;animation:preShine 3.4s linear .8s infinite;
 }
-.pre-welcome i{font-style:normal;color:rgba(103,232,249,.55);font-weight:400}
+@keyframes preShine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.pre-welcome i{font-style:normal;color:rgba(103,232,249,.6);font-weight:400}
 @keyframes preWelcome{to{opacity:1;transform:none;filter:blur(0)}}
+.pre-sub{
+  font-size:clamp(11px,1.2vw,14px);letter-spacing:.48em;color:rgba(150,182,208,.85);
+  opacity:0;animation:preSub 1s var(--ease) .85s both;
+}
+@keyframes preSub{from{opacity:0;transform:translateY(10px);letter-spacing:.7em}to{opacity:1;transform:none;letter-spacing:.48em}}
+.pre-skip{position:absolute;right:clamp(20px,4vw,52px);bottom:clamp(22px,4vh,44px);z-index:3;
+  font-size:11.5px;letter-spacing:.3em;color:rgba(140,175,200,.7);border:1px solid var(--line);
+  padding:10px 20px;border-radius:99px;background:rgba(8,20,38,.5);backdrop-filter:blur(8px);
+  transition:.35s;opacity:0;animation:preSub 1s var(--ease) 1.4s both}
+.pre-skip:hover{color:var(--cyan);border-color:rgba(103,232,249,.5);box-shadow:0 0 26px -8px rgba(103,232,249,.5)}
+.pre-num{font-size:clamp(40px,6vw,64px);font-weight:300;letter-spacing:.06em;display:flex;align-items:baseline;gap:2px}
+.pre-num em{font-size:.35em;color:var(--cyan);font-style:normal}
+.pre-num span{font-variant-numeric:tabular-nums;min-width:2.2ch;text-align:right}
+.pre-line{width:min(340px,62vw);height:1px;background:rgba(140,190,235,.16);overflow:hidden}
+.pre-line i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),var(--cyan));transition:width .2s;
+  box-shadow:0 0 12px rgba(103,232,249,.7)}
+.pre-label{font-size:12px;letter-spacing:.5em;color:var(--dim);text-transform:uppercase}
 
 /* ---------- 导航 ---------- */
 #nav{
