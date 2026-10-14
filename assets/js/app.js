@@ -69,7 +69,7 @@
   (function preload() {
     var el = $("#preloader"), num = $("#pre-count"), line = $(".pre-line i");
     if (!el) return;
-    var t0 = performance.now(), DUR = reduced ? 200 : 1350;
+    var t0 = performance.now(), DUR = reduced ? 200 : 1750;
     function step(now) {
       var p = Math.min((now - t0) / DUR, 1);
       var eased = 1 - Math.pow(1 - p, 3);
@@ -770,7 +770,7 @@
     var id = parseInt(m[1], 10);
     setTimeout(function () {
       if (marketById(id)) { selectMapMarket(id); openDrawer(id); }
-    }, 1400);
+    }, 2000);
   })();
 
   /* 兜底：任何原因导致显现未触发时，3 秒后强制完成（防白屏） */
